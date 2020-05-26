@@ -1,0 +1,271 @@
+
+
+.imageCenter {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+}
+
+.imageSlider {
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 100px;
+}
+
+.item{
+    margin-left: 45px;
+    margin-right: 45px;
+    color: #383332 ;
+}
+.itemIcons{
+    margin-left: 50px;
+    align-content: center;
+    color: #383332 ;
+}
+.noItems{
+
+    color: darkgrey ;
+    margin-left: 550px;
+    margin-top: 150px;
+}
+.itemContainer{
+
+    margin-top: 50px;
+}
+.cart{
+    margin-top: 150px;
+
+}
+.table{
+
+    align-items: center;
+}
+
+.tableContainer{
+    width: 80%;
+    margin: 0 auto;
+
+}
+.tableheaderCenter{
+    alignment: center;
+}
+.tableDataPrice{
+    width: 260px;
+}
+.tableDataQ{
+    width: 200px;
+}
+.tableDataTotal{
+     width: 260px;
+ }
+.cartButton{
+
+    color: rosybrown;
+    height: 20px;
+}
+
+.total{
+    background-color: lightcoral;
+    text-align:center;
+    color: darkslategrey;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    align-self: flex-end;
+
+}
+.paymentButton{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+/*FOOTER*/
+
+footer {
+    background: #16222A;
+    background: -webkit-linear-gradient(59deg, #3A6073, #16222A);
+    background: linear-gradient(59deg, #3A6073, #16222A);
+    color: white;
+    margin-top:100px;
+}
+.navStick{
+
+    position: fixed;
+    top: 0;
+}
+.paymentCard{
+    max-width: 18rem;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    position: -webkit-sticky;
+    position: sticky;
+
+}
+footer a {
+    color: #fff;
+    font-size: 14px;
+    transition-duration: 0.2s;
+}
+
+footer a:hover {
+    color: #FA944B;
+    text-decoration: none;
+}
+
+.copy {
+    font-size: 12px;
+    padding: 10px;
+    border-top: 1px solid #FFFFFF;
+}
+
+.footer-middle {
+    padding-top: 2em;
+    color: white;
+}
+
+
+/*SOCİAL İCONS*/
+
+/* footer social icons */
+
+ul.social-network {
+    list-style: none;
+    display: inline;
+    margin-left: 0 !important;
+    padding: 0;
+}
+
+ul.social-network li {
+    display: inline;
+    margin: 0 5px;
+}
+
+
+/* footer social icons */
+
+.social-network a.icoFacebook:hover {
+    background-color: #3B5998;
+}
+
+.social-network a.icoLinkedin:hover {
+    background-color: #007bb7;
+}
+
+.social-network a.icoFacebook:hover i,
+.social-network a.icoLinkedin:hover i {
+    color: #fff;
+}
+
+.social-network a.socialIcon:hover,
+.socialHoverClass {
+    color: #44BCDD;
+}
+
+.social-circle li a {
+    display: inline-block;
+    position: relative;
+    margin: 0 auto 0 auto;
+    -moz-border-radius: 50%;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+    font-size: 15px;
+}
+
+.social-circle li i {
+    margin: 0;
+    line-height: 30px;
+    text-align: center;
+}
+
+.social-circle li a:hover i,
+.triggeredHover {
+    -moz-transform: rotate(360deg);
+    -webkit-transform: rotate(360deg);
+    -ms--transform: rotate(360deg);
+    transform: rotate(360deg);
+    -webkit-transition: all 0.2s;
+    -moz-transition: all 0.2s;
+    -o-transition: all 0.2s;
+    -ms-transition: all 0.2s;
+    transition: all 0.2s;
+}
+
+.social-circle i {
+    color: #595959;
+    -webkit-transition: all 0.8s;
+    -moz-transition: all 0.8s;
+    -o-transition: all 0.8s;
+    -ms-transition: all 0.8s;
+    transition: all 0.8s;
+}
+
+.social-network a {
+    background-color: #F9F9F9;
+}
+
+.viewItemCarousel{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width:75%;
+
+}
+.viewItemCard{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 85px;
+    width: 100%;
+    height: auto;
+
+}
+.navColor{
+    background-color: #243c44;
+
+}
+.trDesign{
+    background-color: #f1f1f1;
+}
+.cartDes{
+
+    width: 250px;
+    font-weight: bold;
+    vertical-align: middle;
+    color: darkslategrey;
+}
+.cartPrice{
+   font-weight: lighter;
+    width: 200px;
+    vertical-align: middle;
+    font-size: medium;
+    color: darkolivegreen;
+}
+.cartImage{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80px;
+
+}
+.cartItems{
+
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 500px;
+}
+
+.discountForm{
+    margin: auto;;
+    width:50%;
+    margin-top: 50px;
+}
