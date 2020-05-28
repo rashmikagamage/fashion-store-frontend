@@ -405,3 +405,45 @@ export const getCart = async (id)=>{
 	const response = await axios.get('http://localhost:4000/api/getCart/'+id.payload);
 	return response
 }
+
+//api route for adding a manager
+export const fetchManager = async (manager) =>{
+ 
+	try{
+  
+	const data = manager ;
+  
+	   const correctData = manager["manager"];
+  
+  
+	const response = await axios.request({
+			method: 'POST',
+			url: "http://localhost:4000/api/signupManager",
+			headers: {
+				'Content-Type': 'application/json;charset=UTF-8',
+					  "Access-Control-Allow-Origin": "*"
+			},
+			data: JSON.stringify(correctData),
+		  
+		  }).then((res) => {
+  
+			const result =  res.data;
+			console.log(result);
+			return result;
+		  });
+  
+		const resData = await response;
+	   
+		console.log('responsee api',resData);
+		
+	   return resData;
+		 
+  
+  
+	}
+	catch(e){
+		console.log(e);
+	}
+  
+	
+  }

@@ -326,3 +326,32 @@ export function tokenChecked(status) {
     payload: status,
   };
 }
+
+export function signUpManagerAction(manager){
+
+	return{
+		type : ACTIONS.MANAGER_SIGN_UP,
+		payload: {
+			   manager
+				 },
+	};
+  }
+  
+  export function registerManagerSuccessAction(manager) {
+	return {
+	  type: ACTIONS.MANAGER_REGISTER_SUCCESS,
+	  payload: {
+		manager,
+	  },
+	};
+  }
+  
+  
+  export function registerManagerFailAction(error) {
+	return {
+	  type: ACTIONS.MANAGER_REGISTER_FAILED,
+	  payload: {
+		error,
+	  },
+	};
+  }

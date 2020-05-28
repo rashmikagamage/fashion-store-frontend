@@ -31,3 +31,6 @@ export const GET_ALL_PRODUCTS = 'app/Products/GET_ALL_PRODUCTS';
 export const  GET_ALL_PRODUCTS_SUCCESS = 'app/Products/GET_ALL_PRODUCTS_SUCCESS';
 export const GET_ALL_PRODUCTS_FAILED = 'app/Products/GET_ALL_PRODUCTS_FAILED';
 export const LOG_OUT = 'app/User/LOG_OUT';
+export const MANAGER_SIGN_UP = 'app/SignUpPage/MANAGER_SIGN_UP';
+export const MANAGER_REGISTER_SUCCESS = 'app/SignUpPage/MANAGER_REGISTER_SUCCESS';
+export const MANAGER_REGISTER_FAILED = 'app/SignUpPage/MANAGER_REGISTER_FAILED';

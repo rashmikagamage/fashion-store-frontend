@@ -19,6 +19,7 @@ import {connect} from "react-redux";
 import * as reduxActions from './common/actions';
 import wishList from "./components/WishList/WishList";
 import {getCart} from "./store/actions";
+import addManger from "./components/managerSignup";
 
 function App (props) {
 
@@ -65,6 +66,7 @@ function App (props) {
                         <Route path ="/login" exact component={login}/>
                         <Route path ="/signup" exact component={signup}/>
                         <Route path ="/AddDiscount" exact component={Discount}/>
+                        <Route path ="/AddManager" exact component={addManger}/>
                     </switch>
                 <Footer/>
             </div>
