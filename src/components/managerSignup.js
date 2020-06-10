@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -10,8 +10,11 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-
+import { useHistory } from "react-router-dom";
 import PropTypes from 'prop-types';
+import axios from "axios";
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
 
 import {connect} from 'react-redux';
 
@@ -19,6 +22,7 @@ import * as reduxActions from '../common/actions';
 
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import { Collapse, IconButton } from '@material-ui/core';
 
 function Copyright() {
   return (
@@ -65,6 +69,70 @@ const validationSchema = Yup.object({
 
 function SignUp({signUpManager}) {
 
+  const[msg, setMsg] = useState();
+  const[show, setShow] = useState(false);
+  const[severity,setSeverity] = useState();
+  
+
+  let history = useHistory();
+
+  function redirect() { history.push("/login"); }
+
+  const fetchData = async (manager) =>{
+ 
+    try{
+    
+    const data = manager ;
+    
+       const correctData = manager["manager"];
+    
+    
+    const response = await axios.request({
+        method: 'POST',
+        url: "http://localhost:4000/api/signupManager",
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*"
+        },
+        data: JSON.stringify(data),
+        
+        }).then((res) => {
+    
+        const result =  res.data;
+        console.log(result);
+
+       /* if (res.data.code != "reg_error"){
+          setShow(true);
+          setSeverity("error");
+          setMsg(res.data.errors);
+        }
+        else{
+          setMsg(res.data.success);
+          setShow(true);
+          setSeverity("info");
+        }
+        //return result;*/
+        });
+    
+      const resData = await response;
+       
+      console.log('responsee api',resData);
+      
+       return resData;
+       
+    
+    
+    }
+    catch(e){
+      console.log(e);
+    }
+    
+    
+    }
+
+
+  
+
     const { handleSubmit, handleChange, values, errors } = useFormik({
       initialValues: {
         firstName: "",
@@ -76,9 +144,20 @@ function SignUp({signUpManager}) {
       validationSchema,
       onSubmit(values) {
           console.log(values);
+          const managerObject = {
+            "firstName": values.firstName,
+            "lastName": values.lastName,
+            "email": values.email,
+            "password": values.password
+          }
+          console.log(managerObject);
+          fetchData(managerObject);
+          //redirect();
         
       }
     });
+
+    
     
     const isDisabled = Object.keys(errors).some(x => errors[x]);
 
@@ -96,10 +175,31 @@ function SignUp({signUpManager}) {
           Manager Sign Up
         </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
+         
+         <Collapse in={show}>
+
+           <Alert severity={severity} variant="filled" action={
+             <IconButton 
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  
+                  setShow(false);
+
+                }}><CloseIcon fontSize="inherit"/>
+                </IconButton>}>{msg}</Alert>
+           
+
+
+         </Collapse>
+          
+          
+          <br></br>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
-                error
+                
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -171,7 +271,8 @@ function SignUp({signUpManager}) {
             color="primary"
             className={classes.submit}
             disabled={isDisabled}
-            onClick = {  () => signUpManager(values.firstName,values.lastName,values.email,values.password)  }
+            onClick = {  handleSubmit  }
+            
           >
             Sign Up
           </Button>
