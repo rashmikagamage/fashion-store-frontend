@@ -3,28 +3,23 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import SignInSide from './SignInSide';
-import {BrowserRouter, Switch, Route, Redirect} from 'react-router-dom';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
 import Alert from '@material-ui/lab/Alert';
-import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import axios from 'axios';
 
-import PropTypes from 'prop-types';
 
-import {useHistory} from "react-router-dom";
+
 import { useFormik } from 'formik';
 import * as Yup from "yup";
-import { Collapse } from '@material-ui/core';
+import { Collapse, IconButton } from '@material-ui/core';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -57,61 +52,71 @@ const validationSchema = Yup.object({
 
 
 
-function SignUp({signUpuser}) {
-  const [msg, setMsg] = useState(); 
-  const [show, setShow] = useState(false);
-  const [severity, setSeverity] = useState();
-  const [checked, setChecked] = useState(false);
+function SignUp({signUpManager}) {
 
-  const handleCheck = (event) => {
-    setChecked(event.target.checked);
-  };
-
-  let history = useHistory();
-  function redirect() {
-    history.push("/login");
-  }
-
-  const fetchData = async (user) => {
+  const[msg, setMsg] = useState();
+  const[show, setShow] = useState(false);
+  const[severity,setSeverity] = useState();
   
 
-    console.log(user)
-    try {
-      const data = user;
-      const correctData = user["user"];
-      const response = await axios
-        .request({
-          method: "POST",
-          url: `http://localhost:4000/api/signup`,
-          headers: {
-            "Content-Type": "application/json;charset=UTF-8",
-            "Access-Control-Allow-Origin": "*",
-          },
-          data: JSON.stringify(data),
-        })
-        .then((res) => {
-          console.log(res.data)
-          if (res.data.code != "reg"){
-            setShow(true);
-            setSeverity("error")
-            setMsg(res.data.errors);
-            
-          }
-          else{
-            setMsg(res.data.success);
-            setShow(true);
-            setSeverity("success");
-            setTimeout(() => { redirect()}, 4000);  
-          }            
+  let history = useHistory();
+
+  function redirect() { history.push("/login"); }
+
+  const fetchData = async (manager) =>{
+ 
+    try{
+    
+    const data = manager ;
+    
+       const correctData = manager["manager"];
+    
+    
+    const response = await axios.request({
+        method: 'POST',
+        url: "http://localhost:4000/api/signupManager",
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*"
+        },
+        data: JSON.stringify(data),
+        
+        }).then((res) => {
+    
+        const result =  res.data;
+        console.log(result);
+
+       if (res.data.code == "error"){
+          setShow(true);
+          setSeverity("error");
+          setMsg(res.data.message);
+        }
+        else{
+          setMsg(res.data.message);
+          setShow(true);
+          setSeverity("success");
+          setTimeout(() => { redirect()}, 4000); 
+        }
+        //return result;
         });
+    
       const resData = await response;
-      
-      return resData;
-      
-    } catch (e) {
+       
+      console.log('responsee api',resData);
+       return resData;
+       
+    
+    
+    }
+    catch(e){
       console.log(e);
     }
-  };
+    
+    
+    }
+
+
+  
 
     const { handleSubmit, handleChange, values, errors } = useFormik({
       initialValues: {
@@ -124,20 +129,22 @@ function SignUp({signUpuser}) {
       validationSchema,
       onSubmit(values) {
           console.log(values);
-          const userObject = {
+          const managerObject = {
             "firstName": values.firstName,
             "lastName": values.lastName,
             "email": values.email,
-            "password": values.password,
-            "newsletter": checked
+            "password": values.password
           }
-          console.log(userObject)
-          fetchData(userObject);
-           
+          console.log(managerObject);
+          fetchData(managerObject);
+          //redirect();
+        
       }
     });
+
     
-  const isDisabled = Object.keys(errors).some(x => errors[x]);
+    
+    const isDisabled = Object.keys(errors).some(x => errors[x]);
 
 
   const classes = useStyles();
@@ -150,25 +157,34 @@ function SignUp({signUpuser}) {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Sign up
+          Manager Sign Up
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}> 
-          <Collapse in={show}>
-          <Alert severity={severity} variant="filled" action={
-            <IconButton
-              aria-label="close"
-              color="inherit"
-              size="small"
-              onClick={() => {
-                setShow(false);
-              }}>
-              <CloseIcon fontSize="inherit" />
-            </IconButton>}>{msg}</Alert>
-          </Collapse>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+         
+         <Collapse in={show}>
+
+           <Alert severity={severity} variant="filled" action={
+             <IconButton 
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  
+                  setShow(false);
+
+                }}><CloseIcon fontSize="inherit"/>
+                </IconButton>}>{msg}</Alert>
+           
+
+
+         </Collapse>
+          
+          
           <br></br>
           <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
               <TextField
+                
                 autoComplete="fname"
                 name="firstName"
                 variant="outlined"
@@ -231,12 +247,6 @@ function SignUp({signUpuser}) {
             </Grid>
             {errors.confirm_password}
 
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={<Checkbox  checked={checked} onChange={handleCheck} color="primary" />}
-                label="I want to receive inspiration, marketing promotions and updates via email."
-              />
-            </Grid>
           </Grid>
 
           <Button
@@ -246,56 +256,19 @@ function SignUp({signUpuser}) {
             color="primary"
             className={classes.submit}
             disabled={isDisabled}
-            onClick={handleSubmit}
+            onClick = {  handleSubmit  }
+            
           >
             Sign Up
           </Button>
-          <Grid container justify="flex-end">
-            <Grid item>
-             <BrowserRouter>
-                    <Switch>                        
-                      <Route  path ="/login" exact component={SignInSide}></Route>
-                      <Link href="/login" variant="body2">
-                      {"Already have an account? Sign In"}
-                      </Link>                   
-                    </Switch>
-              </BrowserRouter>
-            </Grid>
-          </Grid>
         </form>
       </div>
+      <Box mt={5}>
+      </Box>
     </Container>
   );
 }
 
-SignUp.propTypes = {
-  
-    signUpuser: PropTypes.func,
-  };
-  
-  
-  
-  /*const mapStateToProps = (state)=> {
-  
-    console.log('state',state);
-    return{
-     
-      emails : state.email
-    }
-  };
-  
-  
-  const mapDispachToProps = (dispach) => {
-  
-    return {
-     
-      signUpuser : (firstName,lastName,email,password) => dispach(reduxActions.signUpAction({firstName,lastName,email,password})) ,
-  
-  
-    }
-  }*/
-  
 
- // export default connect(mapStateToProps,mapDispachToProps) (SignUp);
-    
-export default  (SignUp);
+
+  export default  (SignUp);

@@ -10,7 +10,9 @@ import Footer from "./components/Footer";
 import Discount from "./components/Discount/Discount";
 import SelectedProducts from "./components/SelectedProducts";
 import login from "./components/SignInSide";
-import signup from "./components/SignUp"
+import signup from "./components/SignUp";
+import AddItem from "./components/AddItem";
+import ManagerDash from "./components/ManagerDash";
 // import NotFound from './components/NotFound/PageNotFound';
 import PrivateRoute from './PrivateRoutes/PrivateRouter';
 import PrivateStoreManagerRoute from "./PrivateRoutes/PrivateRouerForStoreManager";
@@ -19,6 +21,10 @@ import {connect} from "react-redux";
 import * as reduxActions from './common/actions';
 import wishList from "./components/WishList/WishList";
 import {getCart} from "./store/actions";
+import AddManager from "./components/managerSignup";
+import AdminDash from "./components/adminDash";
+
+
 
 function App (props) {
 
@@ -65,6 +71,11 @@ function App (props) {
                         <Route path ="/login" exact component={login}/>
                         <Route path ="/signup" exact component={signup}/>
                         <Route path ="/AddDiscount" exact component={Discount}/>
+                        <Route path ="/AddItem" exact component={AddItem}/>
+                        <Route path ="/ManagerDash" exact component={ManagerDash}/>
+                        <Route path ="/AddManager" exact component={AddManager}/>
+                        <Route path ="/adminDash" exact component={AdminDash}/>
+
                     </switch>
                 <Footer/>
             </div>
