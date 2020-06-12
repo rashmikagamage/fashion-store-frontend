@@ -19,7 +19,6 @@ export const initialState = {
             avgRating: 0,
             ratingCount: {},
             ratingList: {},
-
         }
 
     },

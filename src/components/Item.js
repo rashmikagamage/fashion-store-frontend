@@ -26,7 +26,7 @@ function Item(props) {
     const [inCart , setIncart] = useState(false);
     //const [userId , setUserId] = useState("5eb68be4a37f442020387c0e");
     const[discountAvailable,setDiscountAvailable] = useState(false);
-    const[discountedPrice,setDiscountedPrice] = useState(0.0);
+        const[discountedPrice,setDiscountedPrice] = useState(0.0);
     if(item.discount>0 && discountAvailable === false){
       setDiscountedPrice(item.price*((100-item.discount)/100.00));
         setDiscountAvailable(true);
@@ -74,12 +74,12 @@ function Item(props) {
          <div onClick={()=> history.push("/viewItem?"+"productId="+item._id)}>
         <MDBView hover className="rounded z-depth-4 mb-3 item" waves>
 
-          <img
-            className="img-fluid"
-            src= {"http://localhost:4000/uploads/"+item.images[0].productImage}
-            alt=""
-            onClick={handleClick}
-          />
+              <img
+                className="img-fluid"
+                src= {"http://localhost:4000/uploads/"+item.images[0].productImage}
+                alt=""
+                onClick={handleClick}
+              />
 
           <MDBMask overlay="white-slight" />
         </MDBView>

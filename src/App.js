@@ -31,14 +31,6 @@ function App (props) {
     useEffect(() => {
 
         props.getAllProducts();
-    
-        // if (Date.now() >= decodedUser.exp * 1000) { // check token expired or not
-        //     console.log('expired');
-        //   }
-        //   else{
-        //     console.log('not expired');
-        //   }
-    
         const token = localStorage.getItem('jwtToken');
         if(token === null || token === undefined)
         {
@@ -67,7 +59,6 @@ function App (props) {
                         <Route path ="/viewItem" exact component={viewItem}/>
                         <PrivateRoute exact path="/cart"  component={Cart}></PrivateRoute>
                         <PrivateRoute exact path="/wishlist" component={wishList}></PrivateRoute>
-                        <Route path="/addDiscount" exact component={Discount}/>
                         <Route path ="/login" exact component={login}/>
                         <Route path ="/signup" exact component={signup}/>
                         <Route path ="/AddDiscount" exact component={Discount}/>
@@ -75,7 +66,6 @@ function App (props) {
                         <Route path ="/ManagerDash" exact component={ManagerDash}/>
                         <Route path ="/AddManager" exact component={AddManager}/>
                         <Route path ="/adminDash" exact component={AdminDash}/>
-
                     </switch>
                 <Footer/>
             </div>

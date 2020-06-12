@@ -171,9 +171,6 @@ function AddItem({addItem}) {
     console.log('api data = ',data1);
 
       const correctData = item[""];
-      console.log('correctData',correctData);
-      console.log('title', item.title);
-      
       let formData = new FormData();
       formData.append('title',item.title);
       formData.append('description',item.description);
@@ -232,8 +229,6 @@ function AddItem({addItem}) {
         });
     
       const resData = await response;
-      
-      console.log('responsee api',resData);
       setTimeout(() => { redirect()}, 4000); 
 
       return resData;

@@ -86,7 +86,7 @@ function ImageSlider(props) {
                                 </div>
 
                             </div>
-                            <div className="col-sm">
+                           {/* <div className="col-sm">
                                 <div className="card" style={{width: "15rem"}}>
                                     <img className="card-img-top" src={"http://localhost:4000/uploads/"+props.items[1].images[0].productImage} alt="Card image cap"/>
                                     <div className="card-body">
@@ -116,7 +116,7 @@ function ImageSlider(props) {
                                     </div>
                                 </div>
                             </div>
-
+*/}
                         </div>
                     </div>
                 </div>

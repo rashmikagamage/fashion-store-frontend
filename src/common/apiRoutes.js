@@ -382,8 +382,8 @@ export const deleteRating = async (data) => {
 };
 
 export const getSearchProduct = async (data) =>{
-
-	const response = await axios.get('http://localhost:4000/api/getProductToAddDiscount/'+data.payload);
+	console.log(data.payload)
+	const response = await axios.get(`http://localhost:4000/api/getProductToAddDiscount/`+data.payload);
 	return response.data;
 
 }
