@@ -10,7 +10,6 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import uuid from 'react-uuid';
 import ImageUploader from 'react-images-upload';
 import axios from 'axios';
 import Alert from '@material-ui/lab/Alert';
@@ -54,6 +53,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const validationSchema = Yup.object({
+  itemId: Yup.number("Please enter a number").required("Please fill the field"),
   title: Yup.string().required("Please fill the field"),
   category: Yup.string().required("Please select a category"),
   subCategory: Yup.string().required("Please select a sub category"),
@@ -100,7 +100,6 @@ const validationSchema = Yup.object({
 
 function AddItem({addItem}) {
   
-    const id = uuid();
     const [msg, setMsg] = useState(); 
     const [show, setShow] = useState(false);
     const [severity, setSeverity] = useState();
@@ -172,14 +171,13 @@ function AddItem({addItem}) {
 
       const correctData = item[""];
       let formData = new FormData();
+      formData.append('itemId',item.itemId);
       formData.append('title',item.title);
       formData.append('description',item.description);
       formData.append('category',item.category);
       formData.append('subCategory',item.subCategory);
       formData.append('price',item.price);
       formData.append('discount',item.discount);
-      //formData.append('quantity',item.quantity);
-      //formData.append('size',item.size);
       formData.append('sRed', item.sRed);
       formData.append('sBlack', item.sBlack);
       formData.append('sWhite', item.sWhite);
@@ -224,12 +222,12 @@ function AddItem({addItem}) {
             setShow(true);
             setSeverity("success")
             setMsg(res.data.success);
-             
+            setTimeout(() => { redirect()}, 4000);  
           }
         });
     
       const resData = await response;
-      setTimeout(() => { redirect()}, 4000); 
+      
 
       return resData;
     }
@@ -242,6 +240,7 @@ function AddItem({addItem}) {
     
     const { handleSubmit, handleChange, values, errors } = useFormik({
       initialValues: {
+        itemId: 0,
         title: "",
         category: "",
         description: "",
@@ -282,6 +281,7 @@ function AddItem({addItem}) {
       onSubmit(values) {
           console.log(values);
           const itemObject = {
+            "itemId" : values.itemId,
             "title": values.title,
             "category": values.category,
             "subCategory": values.subCategory,
@@ -354,6 +354,18 @@ function AddItem({addItem}) {
             </IconButton>}>{msg}</Alert>
           </Collapse>
           <br></br>
+          <Grid className={ classes.section} item xs={12}>
+              <TextField
+                name="itemId"
+                variant="outlined"
+                fullWidth
+                id="itemId"
+                label="Item Id"
+                autoFocus
+                onChange={handleChange}
+              />{errors.itemId}
+            </Grid>
+
             <Grid className={ classes.section} item xs={12}>
               <TextField
                 autoComplete="title"
