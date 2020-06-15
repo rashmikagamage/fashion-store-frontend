@@ -2,11 +2,12 @@ import React, {useEffect, useState} from 'react'
 import '../../index.css'
 import {connect} from "react-redux";
 import CartItem from "./CartItem";
+import { useHistory } from "react-router-dom";
 import {deductQuantity, updateTotal, zeroTotal} from "../../store/actions";
 
 function Cart(props) {
 
-
+    const history = useHistory();
     useEffect(()=>{
         props.resetTotal(0);
     },[])
@@ -43,6 +44,8 @@ function Cart(props) {
                                 <p className="card-text">We make deliveries around Island.Please make sure you give right details to get a faster delivery  </p>
                                 <button className=" btn btn-sm btn-outline-pink " onClick={()=>{
                                     props.deductQ(props.cart)
+                                    history.push("/Payment")
+
                                 }}>Proceed to Payment</button>
                             </div>
                         </div>

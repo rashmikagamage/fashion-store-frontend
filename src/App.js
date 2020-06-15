@@ -23,6 +23,8 @@ import wishList from "./components/WishList/WishList";
 import {getCart} from "./store/actions";
 import AddManager from "./components/managerSignup";
 import AdminDash from "./components/adminDash";
+import Payment from "./components/Payment/Payment";
+import Home from "./components/Home/Home";
 
 
 
@@ -56,7 +58,9 @@ function App (props) {
             <div>
                 <HomePage/>
                     <switch>
+                        <Route path = "/" exact component ={Home}/>
                         <Route path = "/" exact component ={ImageSlider}/>
+
                         <Route path="/s" exact component={SelectedProducts}/>
                         <Route path = "/products" exact component ={ItemContainer}/>
                         <Route path ="/viewItem" exact component={viewItem}/>
@@ -69,6 +73,7 @@ function App (props) {
                         <Route path ="/ManagerDash" exact component={ManagerDash}/>
                         <Route path ="/AddManager" exact component={AddManager}/>
                         <Route path ="/adminDash" exact component={AdminDash}/>
+                        <Route path = '/payment' exact component={Payment}/>
                     </switch>
                 <Footer/>
             </div>

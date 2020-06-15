@@ -3,7 +3,16 @@ import logo from '../images/LOGO.png'
 import  '../index.css'
 import {connect} from "react-redux";
 import {Link} from 'react-router-dom'
+import { bounce } from 'react-animations'
+import Radium, {StyleRoot} from 'radium';
 import {update_cart_count} from "../store/actions";
+
+const styles = {
+    bounce: {
+        animation: 'x 3s',
+        animationName: Radium.keyframes(bounce, 'bounce')
+    }
+}
 function Header(props) {
 
     const[cartCount,setCartCount]  = useState(0)
@@ -22,14 +31,15 @@ function Header(props) {
 
             <nav class="navbar navbar-light bg-light center" style={{"height":"90px"}}>
                 <p>Hotline : 0771792083</p>
+
                 <img src={logo} alt = ""class = "imageCenter"/>
                 <Link to="/cart" style={{ textDecoration: 'none' }}>
-                <i className=" nav-link active fas fa-shopping-bag fa-lg  " style={{color: " #FF007F", fontSize:"8"}}> <sup>{cartCount}</sup></i>
+                    <i className=" nav-link active fas fa-shopping-bag fa-lg  " style={{color: "#385573 ", fontSize:"8"}}> <sup> <span style={{color: "#628C07 "}}>{cartCount}</span></sup></i>
                 </Link>
                 <Link to="/wishlist" style={{ textDecoration: 'none' }}>
-                <i className=" nav-link active fas fa-heart fa-lg  "style={{color: " #FF007F", fontSize:"8"}}> <sup>{props.wishlistCount}</sup></i>
+                    <i className=" nav-link active fas fa-heart fa-lg " style={{color: " #385573", fontSize:"8"}}> <sup><span style={{color: "#628C07 "}}>{props.wishlistCount}</span></sup></i>
                 </Link>
-                <i className=" nav-link active fas fa-user fa-lg " style={{color: " #FF007F"}}> </i>
+                <button type="button" className="btn btn-outline-blue-grey btn-sm">Login</button>
             </nav>
 
 
