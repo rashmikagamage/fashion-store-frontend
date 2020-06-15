@@ -26,6 +26,8 @@ import AdminDash from "./components/adminDash";
 import Payment from "./components/Payment/Payment";
 import Home from "./components/Home/Home";
 
+import StoreManagerLogin from "./components/Login/StoreManagerLogin";
+
 
 
 function App (props) {
@@ -79,6 +81,7 @@ function App (props) {
                         <Route path ="/AddManager" exact component={AddManager}/>
                         <Route path ="/adminDash" exact component={AdminDash}/>
                         <Route path = '/payment' exact component={Payment}/>
+                        <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
 
                     </switch>
                 <Footer/>

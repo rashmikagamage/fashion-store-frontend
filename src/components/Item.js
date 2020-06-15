@@ -60,6 +60,19 @@ function Item(props) {
 
     }
 
+    const checkUser = () =>{
+
+        if(props.isAuthenticated && props.role === "user")
+        {
+            history.push("/viewItem?"+"productId="+item._id);
+        }
+        else{
+            
+            setModalShow(true);
+        }
+
+    }
+
 
 
     return (
@@ -70,14 +83,14 @@ function Item(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
     />
-         <div onClick={()=> history.push("/viewItem?"+"productId="+item._id)}>
+         <div onClick={()=> checkUser()} >
         <MDBView hover className="rounded z-depth-4 mb-3 item" waves>
 
               <img
                 className="img-fluid"
                 src= {"http://localhost:4000/uploads/"+item.images[0].productImage}
                 alt=""
-                onClick={handleClick}
+               
               />
 
           <MDBMask overlay="white-slight" />

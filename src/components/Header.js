@@ -7,7 +7,7 @@ import { bounce } from 'react-animations'
 import Radium, {StyleRoot} from 'radium';
 import { useHistory } from "react-router-dom";
 import {update_cart_count} from "../store/actions";
-
+import * as reduxActions from '../common/actions';
 const styles = {
     bounce: {
         animation: 'x 3s',
@@ -28,6 +28,14 @@ function Header(props) {
     useEffect(()=>{
        setCartCount(props.cart.length);
     },[props.cart,props.cartDb])
+
+    const logout = () =>{
+
+        props.logOut();
+        setCartCount(0);
+        history.push('/');
+
+    }
     return(
         <div>
 
@@ -43,6 +51,9 @@ function Header(props) {
                     <i className=" nav-link active fas fa-heart fa-lg " style={{color: " #385573", fontSize:"8"}}> <sup><span style={{color: "#628C07 "}}>{props.wishlistCount}</span></sup></i>
                 </Link>
                 <button type="button" className="btn btn-outline-blue-grey btn-sm" onClick={()=>{history.push("/login")}}>Login</button>
+
+                
+                <button type="button" className="btn btn-outline-blue-grey btn-sm" onClick={()=>logout()}>LogOut</button>
             </nav>
 
 
@@ -66,7 +77,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        count: ()=> dispatch(update_cart_count())
+        count: ()=> dispatch(update_cart_count()),
+        logOut : () => dispatch(reduxActions.logoutAction())
     }
 }
 
