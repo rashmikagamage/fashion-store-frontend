@@ -25,7 +25,7 @@ ol {
 }
 
 .section-title {
-	margin-bottom: 40px;
+	margin-bottom: 20px;
 	text-align: center;
 }
 
@@ -45,7 +45,7 @@ ol {
 	color: #252525;
 	font-size: 36px;
 	font-weight: 700;
-	margin-bottom: 38px;
+	margin-bottom: 20px;
 	position: relative;
 }
 
@@ -594,7 +594,7 @@ ol {
 	padding-right: 65px;
 	padding-left: 65px;
 	padding-top: 0;
-	padding-bottom: 80px;
+	padding-bottom: 10px;
 }
 
 .product-large {
@@ -632,7 +632,7 @@ ol {
 
 .filter-control {
 	text-align: center;
-	margin-bottom: 45px;
+	margin-bottom: 25px;
 	padding-top: 32px;
 }
 
@@ -891,7 +891,7 @@ ol {
 .instagram-photo .insta-item {
 	float: left;
 	width: 16.66%;
-	height: 320px;
+	height: 220px;
 	text-align: center;
 	position: relative;
 }
@@ -938,7 +938,7 @@ ol {
 }
 
 .instagram-photo .insta-item .inside-text h5 {
-	margin-top: 14px;
+	margin-top: 10px;
 }
 
 .instagram-photo .insta-item .inside-text h5 a {
@@ -950,7 +950,7 @@ ol {
 -----------------------*/
 
 .latest-blog {
-	padding-top: 72px;
+	padding-top: 10px;
 	padding-bottom: 80px;
 }
 
@@ -967,7 +967,7 @@ ol {
 }
 
 .single-latest-blog .latest-text {
-	padding-top: 25px;
+	padding-top: 5px;
 }
 
 .single-latest-blog .latest-text .tag-list {
@@ -998,11 +998,11 @@ ol {
 
 .benefit-items {
 	border: 1px solid #ebebeb;
-	margin-top: 45px;
+	margin-top: 15px;
 }
 
 .benefit-items .single-benefit {
-	padding-top: 30px;
+	padding-top: 10px;
 	padding-bottom: 25px;
 	padding-left: 55px;
 	padding-right: 55px;
@@ -1031,10 +1031,6 @@ ol {
 	line-height: 20px;
 }
 
-/*---------------------
-  Partner Logo
------------------------*/
-
 .partner-logo {
 	background: #303030;
 	padding: 38px 0;
@@ -1053,5 +1049,47 @@ ol {
 .owl-carousel .owl-item img {
 	display: block;
 	width: auto;
+}
+
+.single-related-product .desc {
+	margin: 15px;
+}
+
+/* line 610, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+.single-related-product .price {
+	font-weight: 600;
+	color: #000;
+}
+
+/* line 614, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+.single-related-product a {
+	color: #000;
+}
+
+/* line 619, /Applications/MAMP/htdocs/1.monthy projects/29.Shop/scss/theme/_home.scss */
+.logo-wrap {
+	padding: 60px 65px;
+	background-color: white;
+	box-shadow: -21.213px 21.213px 30px 0px rgba(157, 157, 157, 0.2);
+}
+
+.single-img img {
+	-webkit-filter: grayscale(100%);
+	-moz-filter: grayscale(100%);
+	-ms-filter: grayscale(100%);
+	-o-filter: grayscale(100%);
+	filter: grayscale(100%);
+	-webkit-transition: all 0.3s ease 0s;
+	-moz-transition: all 0.3s ease 0s;
+	-o-transition: all 0.3s ease 0s;
+	transition: all 0.3s ease 0s;
+}
+.section-gap {
+	padding: 120px 0;
+}
+.top-section-area .top-left ul li .lnr {
+	color: #fff;
+	font-weight: 900;
+	margin: 0px 20px;
 }
 

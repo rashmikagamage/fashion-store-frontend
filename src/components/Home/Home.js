@@ -21,6 +21,7 @@ import Radium, {StyleRoot} from 'radium';
 import './style.css'
 import image1 from "../../images/ImageSlider/imageSlider1.jpg";
 import image2 from "../../images/ImageSlider/imageSlider2.jpg";
+import SmallCategories from "./SmallCategories";
 
 function Home() {
     const styles = {
@@ -112,8 +113,8 @@ function Home() {
                 </div>
             </div>
             </StyleRoot>
-
-            <center>
+            <SmallCategories/>
+          {/*  <center>
                 <div>
                     <div className="imageSlider">
                         <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
@@ -146,9 +147,9 @@ function Home() {
                         </div>
                     </div>
                 </div>
-            </center>
+            </center>*/}
 
-            <div className="instagram-photo">
+            <div className="instagram-photo mt-5">
                 <div className="insta-item set-bg">
                     <img src={insta1} alt=""/>
                 </div>
@@ -166,6 +167,27 @@ function Home() {
                 </div>
                 <div className="insta-item set-bg">
                     <img src={insta6} alt=""/>
+                </div>
+
+            </div>
+            <div className="instagram-photo mb-5">
+                <div className="insta-item set-bg">
+                    <img src={insta5} alt=""/>
+                </div>
+                <div className="insta-item set-bg">
+                    <img src={insta4} alt=""/>
+                </div>
+                <div className="insta-item set-bg">
+                    <img src={insta2} alt=""/>
+                </div>
+                <div className="insta-item set-bg">
+                    <img src={insta1} alt=""/>
+                </div>
+                <div className="insta-item set-bg">
+                    <img src={insta3} alt=""/>
+                </div>
+                <div className="insta-item set-bg">
+                    <img src={insta1} alt=""/>
                 </div>
 
             </div>
