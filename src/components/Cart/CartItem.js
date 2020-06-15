@@ -1,17 +1,14 @@
 import React, {useEffect, useState} from 'react'
 import '../../index.css'
 import {connect} from "react-redux";
-import {down_count_in_cart, remove_item, up_count_in_cart} from "../../store/actions";
+import {down_count_in_cart, remove_item, remove_item_DB, up_count_in_cart} from "../../store/actions";
 import {MDBBtn} from "mdbreact";
 
 
 
 function CartItem(props) {
 
-
-
     const {item} = props;
-
 
     return (
         <div>
@@ -26,16 +23,6 @@ function CartItem(props) {
                         <tr>Size :{item.selectedSize}</tr>
                     </td>
                     <td>
-                      {/*  <tr>
-                            <td><button><i className="fas fa-plus-circle"  onClick={
-                                () => {props.upCount(props.item.itemID);
-                                    setItemTotal(itemTotal+item.price);
-                                }
-                            }></i></button></td>
-                            <td>{item.quantityInCart}</td>
-                            <td><button><i className="fas fa-minus-circle" onClick={() => props.downCount(props.item.itemID)}></i></button></td>
-
-                        </tr>*/}
                     </td>
                     <td className="cartPrice ">
                         <tr> Price was LKR {item.price}.00</tr>
@@ -46,7 +33,9 @@ function CartItem(props) {
                     <td>
                         <MDBBtn className="far fa-trash-alt btn btn-pink"
                        onClick={()=>{
-                            props.remove(item)
+                           props.remove(item);
+                           props.removeDb(item,props.userId)
+
                        }}/>
                     </td>
                 </tr>
@@ -75,7 +64,8 @@ function CartItem(props) {
 const mapStateToProps = state => {
     return {
 
-        state: state
+        state: state,
+        userId : state.auth.userId
     }
 };
 
@@ -84,7 +74,8 @@ const mapDispatchToProps = dispatch => {
 
         upCount: (itemId) => dispatch(up_count_in_cart(itemId)),
         downCount: (itemId) => dispatch(down_count_in_cart(itemId)),
-        remove :(item) => dispatch(remove_item(item))
+        remove :(item) => dispatch(remove_item(item)),
+        removeDb : (item,userId) => dispatch(remove_item_DB(item,userId))
 
     }
 };

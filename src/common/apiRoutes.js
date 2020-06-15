@@ -403,5 +403,14 @@ export const deductQuantity = async (data)=>{
 
 export const getCart = async (id)=>{
 	const response = await axios.get('http://localhost:4000/api/getCart/'+id.payload);
-	return response
+	return response;
+}
+
+export const updateCartDb = async(data)=>{
+	const response = await axios.post('http://localhost:4000/api/addItemToCart/'+data[0].userId,{data:data[0].payload})
+}
+
+export const removeCartDb = async (data)=>{
+		//console.log(data[0].payload.uuid)
+	const response =await axios.patch('http://localhost:4000/api/deletecart/'+data[0].userId,{uuid:data[0].payload.uuid})
 }

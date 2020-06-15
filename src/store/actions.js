@@ -34,6 +34,12 @@ export function update_cart_count() {
         payload: 1
     }
 }
+export  function update_cart_DB(item,userId) {
+    return{
+        type: 'UPDATE_CART_DB',
+        payload : item,userId
+    }
+}
 export  function  up_count_in_cart(itemId){
     return {
         type: '',
@@ -159,4 +165,12 @@ export function getCartSuccess(data) {
         payload: data,
 
     };
+}
+
+export function remove_item_DB(item,userId) {
+
+    return{
+        type:'REMOVE_CART_DB',
+        payload : item,userId
+    }
 }

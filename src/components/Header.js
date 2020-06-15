@@ -6,13 +6,16 @@ import {Link} from 'react-router-dom'
 import {update_cart_count} from "../store/actions";
 function Header(props) {
 
+    const[cartCount,setCartCount]  = useState(0)
     useEffect(()=>{
             props.cart.map(item=>{
                 props.count()
             })
 
     },[])
-
+    useEffect(()=>{
+       setCartCount(props.cart.length);
+    },[props.cart,props.cartDb])
     return(
         <div>
 
@@ -21,7 +24,7 @@ function Header(props) {
                 <p>Hotline : 0771792083</p>
                 <img src={logo} alt = ""class = "imageCenter"/>
                 <Link to="/cart" style={{ textDecoration: 'none' }}>
-                <i className=" nav-link active fas fa-shopping-bag fa-lg  " style={{color: " #FF007F", fontSize:"8"}}> <sup>{props.cartCount}</sup></i>
+                <i className=" nav-link active fas fa-shopping-bag fa-lg  " style={{color: " #FF007F", fontSize:"8"}}> <sup>{cartCount}</sup></i>
                 </Link>
                 <Link to="/wishlist" style={{ textDecoration: 'none' }}>
                 <i className=" nav-link active fas fa-heart fa-lg  "style={{color: " #FF007F", fontSize:"8"}}> <sup>{props.wishlistCount}</sup></i>
@@ -42,6 +45,7 @@ const mapStateToProps = state => {
        cartCount : state.itemInCartCount,
        wishlistCount : state.auth.wishListCount,
         cart:state.cart,
+        cartDb : state.user.cart
 
 
     }

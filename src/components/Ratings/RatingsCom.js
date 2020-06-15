@@ -105,9 +105,6 @@ export function RatingsCom({
 		} else {
 		}
 	}, [product]);
-
-	console.log("userRole", progressRating);
-
 	const [comment, setComment] = useState("");
 
 	const [userAlreadyRated, setuserAlreadyRated] = useState(false);
@@ -119,7 +116,6 @@ export function RatingsCom({
 
 	const addRate = (id, userName, value, comment) => {
 		const date = new Date();
-		console.log("value,comment", value, comment);
 		if (value === 0 || comment === "") {
 		} else {
 			addRating(id, userName, value, comment, date);
@@ -129,7 +125,6 @@ export function RatingsCom({
 	};
 
 	const setEditRating = (comment, rate) => {
-		console.log("comment");
 		setComment(comment);
 		setValue(rate);
 		setEdit(true);
@@ -151,8 +146,6 @@ export function RatingsCom({
 	};
 
 	const deleteRating = () => {
-		console.log("delete rating"); // productId,username,rateId
-
 		deleteRatings(
 			product,
 			stateRateUserDeatils.rating.userName,
@@ -213,7 +206,7 @@ export function RatingsCom({
 								</button>
 							</div>
 						) : (
-							console.log("not rated")
+							console.log("")
 						)}
 
 						<form onSubmit={handleSubmit}>

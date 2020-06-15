@@ -59,7 +59,8 @@ export const initialState = {
     searchedProduct :{},
     discountStatus : 0,
     cartCheck: false,
-    cart: []
+    cart: [],
+    cartCount : 0
 
 };
 
@@ -186,7 +187,7 @@ const reducer = (state = initialState, {type, payload}) => {
         let arr = newState.cart;
         newState.cart = [];
         arr.map(item=>{
-            if(item._id !== payload._id){
+            if(item.uuid != payload.uuid){
                 newState.cart.push(item)
             }
         })
@@ -204,6 +205,7 @@ const reducer = (state = initialState, {type, payload}) => {
     }if(type==='SET_CART'){
 
         newState.cart = newState.user.cart;
+
     }
     if(type === "CHECK_ITEM_IN_WISHLIST"){
         newState.item.checkItemIsInWishList = payload;
@@ -237,8 +239,15 @@ const reducer = (state = initialState, {type, payload}) => {
        
         newState.auth.isTokenChecked = true;
     }if(type=="GET_CART_SUCCESS"){
+       newState.user.cart = payload[0].cart;
+       newState.cart = payload[0].cart;
+       newState.itemInCartCount = payload[0].cart.length;
+       let total=0;
+       payload[0].cart.map(x=>{
+           total = x.price*( (100 - x.discount)/100)
+       })
+       newState.cartTotal = total;
 
-       newState.user.cart = payload.cart
 
     }
     

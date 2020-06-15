@@ -1,4 +1,4 @@
-import React, { Component , useEffect } from "react";
+import React, {Component, useEffect, useState} from "react";
 import HomePage from "./components/HomePage";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Cart from "./components/Cart/Cart";
@@ -28,6 +28,8 @@ import AdminDash from "./components/adminDash";
 
 function App (props) {
 
+
+    const[a,seta] = useState(1);
     useEffect(() => {
 
         props.getAllProducts();
@@ -45,7 +47,8 @@ function App (props) {
         }
         
         },[])
-  
+
+
     return (
 
 

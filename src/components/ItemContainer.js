@@ -3,7 +3,6 @@ import {MDBRow} from "mdbreact";
 import '../index.css'
 import Item from './Item';
 import {connect} from "react-redux";
-import TestModel from "./TestModel";
 
 import * as reduxActions from '../common/actions';
 
@@ -18,9 +17,6 @@ function ItemContainer(props) {
         return (
         <div>
 
-            {
-               props.cartCheck ? <TestModel/> : console.log()
-            }
 
             <MDBRow className="itemContainer">
 

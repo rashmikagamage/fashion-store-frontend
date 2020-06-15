@@ -7,11 +7,18 @@ import '../../index.css';
 import '../../imagegallery.scss'
 import ImageGallery from 'react-image-gallery';
 import {MDBBtn, MDBCol} from "mdbreact";
-import {add_to_total, cart_check_true, check_cart, update_cart, update_cart_count} from "../../store/actions";
-import TestModel from "../TestModel";
+import uuid from 'react-uuid'
+import {
+    add_to_total,
+    cart_check_true,
+    check_cart,
+    update_cart,
+    update_cart_count,
+    update_cart_DB
+} from "../../store/actions";
 import CartModal from './CartModal';
 import Ratings from "../Ratings/RatingsCom";
-function ViewItem({getItemDetails, item,history,updateCart,updateCartCount,updateTotalInCart,checkCart,updateCartCheckTrue}) {
+function ViewItem({getItemDetails,userId,item,history,updateCart,updateCartCount,addToCartDb,updateTotalInCart,checkCart,updateCartCheckTrue}) {
 
     let images = [];
     const[selectedColor,setselectedColor] = useState(" Pick a Color");
@@ -241,7 +248,7 @@ function ViewItem({getItemDetails, item,history,updateCart,updateCartCount,updat
         } else {
             updateCartCheckTrue();
             return (
-                <diV><TestModel/></diV>
+                <diV></diV>
             )
         }
     }
@@ -313,8 +320,10 @@ function ViewItem({getItemDetails, item,history,updateCart,updateCartCount,updat
                                             <MDBBtn className="fal fa-shopping-bag fa-2x mb-1 mt-3 btn btn-pink"  onClick={()=>{
                                                 Object.assign(item,{selectedColor:selectedColor});
                                                 Object.assign(item,{selectedSize:selectedSize});
+                                                Object.assign(item,{uuid:uuid()});
                                             updateCart(item);
                                             updateCartCount();
+                                            addToCartDb(item,userId);
                                             setModalShow(true);
                                         }}> </MDBBtn>
 
@@ -358,6 +367,7 @@ function ViewItem({getItemDetails, item,history,updateCart,updateCartCount,updat
 }const mapStateToProps = (state) => {    return {
 
         item: state.item.currentSelectedItem,
+        userId : state.auth.userId,
 
     }
 };const mapDispatchToProps = dispatch => {
@@ -365,6 +375,7 @@ function ViewItem({getItemDetails, item,history,updateCart,updateCartCount,updat
     return {
 
         updateCart : (item)=>dispatch( update_cart(item)),
+        addToCartDb : (item,userId) => dispatch(update_cart_DB(item,userId)),
         updateCartCount : () =>dispatch(update_cart_count()),
         updateTotalInCart : (item) => dispatch(add_to_total(item)),
         updateCartCheckTrue : () => dispatch(cart_check_true()),
