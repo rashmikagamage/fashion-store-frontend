@@ -32,7 +32,7 @@ function Home() {
 
     const style2 = {
         bounce: {
-            animation: 'x 2s',
+            animation: 'x 4s',
             animationName: Radium.keyframes(slideInRight, 'bounce')
         }
     }
@@ -61,7 +61,7 @@ function Home() {
                                 </div>
                                 <div className="sb-text">
                                     <h6>Delivery On Time</h6>
-                                    <p>If good have prolems</p>
+                                    <p>We Promise You!</p>
                                 </div>
                             </div>
                         </div>
@@ -124,10 +124,10 @@ function Home() {
                             </ol>
                             <div className="carousel-inner">
                                 <div className="carousel-item active">
-                                    <img className="d-block w-100" src={image1} alt="First slide"/>
+                                    <img className="d-block w-100" src={image2} alt="First slide"/>
                                 </div>
                                 <div className="carousel-item">
-                                    <img className="d-block w-100" src={image2} alt="Second slide"/>
+                                    <img className="d-block w-100" src={image1} alt="Second slide"/>
                                 </div>
                                 <div className="carousel-item">
                                     <img className="d-block w-100" src={image2} alt="Third slide"/>

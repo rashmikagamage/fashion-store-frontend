@@ -3,6 +3,8 @@ import '../../index.css'
 import {connect} from "react-redux";
 import CartItem from "./CartItem";
 import { useHistory } from "react-router-dom";
+import {bounceInDown} from 'react-animations'
+import Radium, {StyleRoot} from 'radium';
 import {deductQuantity, updateTotal, zeroTotal} from "../../store/actions";
 
 function Cart(props) {
@@ -18,10 +20,16 @@ function Cart(props) {
             props.changeTotal(item.price * ((100 - item.discount) / 100));
         })
     }, []);
+    const styles = {
+        bounce: {
+            animation: 'x 2s',
+            animationName: Radium.keyframes(bounceInDown, 'bounce')
+        }
+    }
     return (
         <div>
-
-            <table className="tableContainer">
+            <StyleRoot>
+            <table className="tableContainer" style={styles.bounce}>
                 <tr>
                     <td>
                         <div>
@@ -36,7 +44,7 @@ function Cart(props) {
 
                     </td>
 
-                    <td className="cardStick position-relative">
+                    <td className="cardStick position-relative" >
                         <div className="card text-dark bg-light mb-3 mt-5   paymentCard">
                             <div className="card-header">Payment</div>
                             <div className="card-body">
@@ -45,17 +53,16 @@ function Cart(props) {
                                 <button className=" btn btn-sm btn-outline-pink " onClick={()=>{
                                     props.deductQ(props.cart)
                                     history.push("/Payment")
-
                                 }}>Proceed to Payment</button>
                             </div>
                         </div>
-
                     </td>
+
 
 
                 </tr>
             </table>
-
+        </StyleRoot>
 
         </div>
 

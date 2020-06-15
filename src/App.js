@@ -56,11 +56,16 @@ function App (props) {
 
         <Router>
             <div>
-                <HomePage/>
+
                     <switch>
+                        <Route path="/" exact component={HomePage}/>
+                        <Route path="/viewItem" exact component={HomePage}/>
+                        <Route path="/products" exact component={HomePage}/>
+                        <Route path="/wislist" exact component={HomePage}/>
+                        <Route path="/cart" exact component={HomePage}/>
+                        <Route path="/payment" exact component={HomePage}/>
                         <Route path = "/" exact component ={Home}/>
                         <Route path = "/" exact component ={ImageSlider}/>
-
                         <Route path="/s" exact component={SelectedProducts}/>
                         <Route path = "/products" exact component ={ItemContainer}/>
                         <Route path ="/viewItem" exact component={viewItem}/>
@@ -74,6 +79,7 @@ function App (props) {
                         <Route path ="/AddManager" exact component={AddManager}/>
                         <Route path ="/adminDash" exact component={AdminDash}/>
                         <Route path = '/payment' exact component={Payment}/>
+
                     </switch>
                 <Footer/>
             </div>

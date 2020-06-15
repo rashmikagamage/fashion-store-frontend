@@ -3,9 +3,10 @@ import {connect} from "react-redux";
 import {search_product, update_product} from "../../store/actions";
 import AlertDiscount from "./AlertDiscount";
 import '../../index.css'
+import {useHistory} from 'react-router-dom';
+
+
 function Discount(props) {
-
-
 
     const[productID,setProductID] = useState("");
     const[updateObject,setUpdateObject] = useState({ _id :"", discount : 0});
@@ -14,20 +15,21 @@ function Discount(props) {
         setUpdateObject({...updateObject,_id:props.product._id});
     },[props.product._id]);
 
+    const history = useHistory();
+
     function validate() {
 
     if(updateObject.discount > 99){
             alert("Discount exceeds maximum limit");
-
-
         }else{
             props.updateProduct(updateObject);
+
         }
     }
 
 return(
     <div>
-
+        <button type="button" className="btn btn-primary btn-sm" onClick={()=>{history.push("/managerdash")}}>Go to Dashboard</button>
         <form className="discountForm">
             <input className="form-control" type="text" value={productID} onChange={event => setProductID(event.target.value)} placeholder="Enter Product ID to Search"/>
             <button type="button"  onClick={()=>props.searchProduct(productID)} className="btn btn-primary">Search</button>

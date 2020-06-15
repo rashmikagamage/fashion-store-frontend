@@ -5,6 +5,7 @@ import {connect} from "react-redux";
 import {Link} from 'react-router-dom'
 import { bounce } from 'react-animations'
 import Radium, {StyleRoot} from 'radium';
+import { useHistory } from "react-router-dom";
 import {update_cart_count} from "../store/actions";
 
 const styles = {
@@ -14,6 +15,8 @@ const styles = {
     }
 }
 function Header(props) {
+
+    const history = useHistory();
 
     const[cartCount,setCartCount]  = useState(0)
     useEffect(()=>{
@@ -39,7 +42,7 @@ function Header(props) {
                 <Link to="/wishlist" style={{ textDecoration: 'none' }}>
                     <i className=" nav-link active fas fa-heart fa-lg " style={{color: " #385573", fontSize:"8"}}> <sup><span style={{color: "#628C07 "}}>{props.wishlistCount}</span></sup></i>
                 </Link>
-                <button type="button" className="btn btn-outline-blue-grey btn-sm">Login</button>
+                <button type="button" className="btn btn-outline-blue-grey btn-sm" onClick={()=>{history.push("/login")}}>Login</button>
             </nav>
 
 
