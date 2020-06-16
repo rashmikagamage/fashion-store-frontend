@@ -49,9 +49,7 @@ export const fetchLogin = async (user) => {
 
         const resData = await response;
         return resData;
-
-
-    } catch (e) {
+	} catch (e) {
         console.log(e);
     }
 
@@ -413,4 +411,55 @@ export const updateCartDb = async(data)=>{
 export const removeCartDb = async (data)=>{
 		//console.log(data[0].payload.uuid)
 	const response =await axios.patch('http://localhost:4000/api/deletecart/'+data[0].userId,{uuid:data[0].payload.uuid})
+}
+
+
+export const LoginAsStoreManager = async (user) => {
+
+    try {
+
+      const {email,password} = user;
+      const correctData = {email,password}
+      console.log('api',correctData);
+        const response = await axios.request({
+            method: 'POST',
+            url: `http://localhost:4000/api/managerLogin`,
+           	data: correctData,
+
+        }).then((res) => {
+
+            const result = res.data;
+            return result;
+        });
+
+        const resData = await response;
+        return resData;
+	} catch (e) {
+        console.log(e);
+    }
+}
+
+export const LoginAsAdmin = async (user) => {
+
+    try {
+
+      const {email,password} = user;
+      const correctData = {email,password}
+      console.log('api',correctData);
+        const response = await axios.request({
+            method: 'POST',
+            url: `http://localhost:4000/api/adminLogin`,
+           	data: correctData,
+
+        }).then((res) => {
+
+            const result = res.data;
+            return result;
+        });
+
+        const resData = await response;
+        return resData;
+	} catch (e) {
+        console.log(e);
+    }
 }

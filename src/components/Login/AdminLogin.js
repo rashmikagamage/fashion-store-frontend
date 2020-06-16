@@ -17,9 +17,9 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 
-import * as reduxActions from '../common/actions';
+import * as reduxActions from '../../common/actions';
 
-import {fetchLogin} from '../common/apiRoutes';
+import {LoginAsAdmin} from '../../common/apiRoutes';
 
 import jwt_decode from 'jwt-decode';
 
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInSide({loginUser,loginSuccess}) {
+function AdminLogin({loginUser,loginSuccess}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,7 +97,7 @@ function SignInSide({loginUser,loginSuccess}) {
 const login = async(email,password) => {
   
  
- const res = await fetchLogin({email,password});
+ const res = await LoginAsAdmin({email,password});
  console.log('res in login',res);
 
  if (res.isValidLogin) { 
@@ -105,20 +105,20 @@ const login = async(email,password) => {
         localStorage.setItem('jwtToken',res.token);
   
         const decodedUser = jwt_decode(res.token);
-console.log('decodeUser login',decodedUser);
+        console.log('decodeUser login',decodedUser);
 
         setMessage(res.message);
         setIsLog(true);
 
         loginSuccess(decodedUser);
 
-        history.push("/");
+        history.push("/adminDash"); // redirects to Admin dashboard
         
   
-      //  yield put(globalActions.loginSuccessAction(decodedUser));
+      
   }
       else{
-      //  yield put(globalActions.loginFailAction());
+     
 
       setMessage(res.message);
       setIsLog(false);
@@ -130,16 +130,12 @@ console.log('decodeUser login',decodedUser);
       }
 }
 
-const loginAsAdmin = () => {
-
-  history.push("/adminLogin");
-
-}
-
 const loginAsStoreManager = () => {
- 
+
   history.push("/stManagerLogin");
+
 }
+
 
   return (
 
@@ -154,7 +150,7 @@ const loginAsStoreManager = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          <h1>User Login</h1>
+          <h1>StoreManager Login</h1>
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -221,21 +217,12 @@ const loginAsStoreManager = () => {
             variant="contained"
             color="primary"
             className={classes.submit}
-            onClick = {  () => loginAsAdmin()  }
+            onClick = {  () => loginAsStoreManager()  }
           >
             Login as Admin
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button
-          type="submit"
          
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick = {  () => loginAsStoreManager()  }
-        >
-        Login as SM
-        </Button>
 
             <Box mt={5}>
               <Copyright />
@@ -250,7 +237,7 @@ const loginAsStoreManager = () => {
  
 }
 
-SignInSide.propTypes = {
+AdminLogin.propTypes = {
   
   loginUser: PropTypes.func,
 };
@@ -274,4 +261,4 @@ const mapDispachToProps = (dispach) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispachToProps) (SignInSide);
+export default connect(mapStateToProps,mapDispachToProps) (AdminLogin);

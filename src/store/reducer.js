@@ -234,6 +234,7 @@ const reducer = (state = initialState, {type, payload}) => {
         newState.auth.email = '';
         newState.auth.role = "guest";
         newState.auth.isAuthenticated = false;
+        newState.auth.wishListCount = 0;
     }
     if(type === "IS_TOKEN_CHECKED"){
        

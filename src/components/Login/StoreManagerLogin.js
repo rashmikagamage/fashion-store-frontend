@@ -17,9 +17,9 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'react-redux';
 
-import * as reduxActions from '../common/actions';
+import * as reduxActions from '../../common/actions';
 
-import {fetchLogin} from '../common/apiRoutes';
+import {LoginAsStoreManager} from '../../common/apiRoutes';
 
 import jwt_decode from 'jwt-decode';
 
@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function SignInSide({loginUser,loginSuccess}) {
+function StoreManagerLogin({loginUser,loginSuccess}) {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -97,28 +97,28 @@ function SignInSide({loginUser,loginSuccess}) {
 const login = async(email,password) => {
   
  
- const res = await fetchLogin({email,password});
- console.log('res in login',res);
+ const res = await LoginAsStoreManager({email,password});
+ console.log('res in login AS Store Manager',res);
 
  if (res.isValidLogin) { 
 
         localStorage.setItem('jwtToken',res.token);
   
         const decodedUser = jwt_decode(res.token);
-console.log('decodeUser login',decodedUser);
+        console.log('decodeUser login',decodedUser);
 
         setMessage(res.message);
         setIsLog(true);
 
         loginSuccess(decodedUser);
 
-        history.push("/");
+        history.push("/storeDash"); // redirects to storemanager dashboard
         
   
-      //  yield put(globalActions.loginSuccessAction(decodedUser));
+      
   }
       else{
-      //  yield put(globalActions.loginFailAction());
+     
 
       setMessage(res.message);
       setIsLog(false);
@@ -136,10 +136,6 @@ const loginAsAdmin = () => {
 
 }
 
-const loginAsStoreManager = () => {
- 
-  history.push("/stManagerLogin");
-}
 
   return (
 
@@ -154,7 +150,7 @@ const loginAsStoreManager = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-          <h1>User Login</h1>
+          <h1>StoreManager Login</h1>
           </Typography>
           <form className={classes.form} noValidate onSubmit={handleSubmit}>
             <TextField
@@ -226,16 +222,7 @@ const loginAsStoreManager = () => {
             Login as Admin
           </Button>
           &nbsp;&nbsp;&nbsp;&nbsp;
-          <Button
-          type="submit"
          
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          onClick = {  () => loginAsStoreManager()  }
-        >
-        Login as SM
-        </Button>
 
             <Box mt={5}>
               <Copyright />
@@ -250,7 +237,7 @@ const loginAsStoreManager = () => {
  
 }
 
-SignInSide.propTypes = {
+StoreManagerLogin.propTypes = {
   
   loginUser: PropTypes.func,
 };
@@ -274,4 +261,4 @@ const mapDispachToProps = (dispach) => {
   }
 }
 
-export default connect(mapStateToProps,mapDispachToProps) (SignInSide);
+export default connect(mapStateToProps,mapDispachToProps) (StoreManagerLogin);
