@@ -132,7 +132,7 @@ console.log('decodeUser login',decodedUser);
 
 const loginAsAdmin = () => {
 
-  history.push("/");
+  history.push("/adminLogin");
 
 }
 

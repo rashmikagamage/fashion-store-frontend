@@ -98,7 +98,7 @@ const login = async(email,password) => {
   
  
  const res = await LoginAsStoreManager({email,password});
- console.log('res in login',res);
+ console.log('res in login AS Store Manager',res);
 
  if (res.isValidLogin) { 
 
@@ -112,7 +112,7 @@ const login = async(email,password) => {
 
         loginSuccess(decodedUser);
 
-        history.push("/"); // redirects to storemanager dashboard
+        history.push("/storeDash"); // redirects to storemanager dashboard
         
   
       
@@ -132,7 +132,7 @@ const login = async(email,password) => {
 
 const loginAsAdmin = () => {
 
-  history.push("/");
+  history.push("/adminLogin");
 
 }
 

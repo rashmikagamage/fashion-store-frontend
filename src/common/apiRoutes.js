@@ -424,7 +424,7 @@ export const LoginAsStoreManager = async (user) => {
         const response = await axios.request({
             method: 'POST',
             url: `http://localhost:4000/api/managerLogin`,
-           	data: JSON.stringify(correctData),
+           	data: correctData,
 
         }).then((res) => {
 
@@ -449,7 +449,7 @@ export const LoginAsAdmin = async (user) => {
         const response = await axios.request({
             method: 'POST',
             url: `http://localhost:4000/api/adminLogin`,
-           	data: JSON.stringify(correctData),
+           	data: correctData,
 
         }).then((res) => {
 
