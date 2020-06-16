@@ -7,6 +7,8 @@ import '../../index.css';
 import '../../imagegallery.scss'
 import ImageGallery from 'react-image-gallery';
 import {MDBBtn, MDBCol} from "mdbreact";
+import {fadeInRight} from 'react-animations'
+import Radium, {StyleRoot} from 'radium';
 import uuid from 'react-uuid'
 import {
     add_to_total,
@@ -18,6 +20,12 @@ import {
 } from "../../store/actions";
 import CartModal from './CartModal';
 import Ratings from "../Ratings/RatingsCom";
+import fadd from "./icon/f-add-4.jpg"
+import fadd2 from "./icon/f-add-5.jpg"
+import  fadd3 from "./icon/f-add-6.jpg"
+
+
+
 function ViewItem({getItemDetails,userId,item,history,updateCart,updateCartCount,addToCartDb,updateTotalInCart,checkCart,updateCartCheckTrue}) {
 
     let images = [];
@@ -28,6 +36,31 @@ function ViewItem({getItemDetails,userId,item,history,updateCart,updateCartCount
     const[isColorSelected,setColorSelceted] = useState(false);
     const [displayAvailability,setDisplayAvailability] = useState("Click here Check Availability");
     const[disAvailable,setDisAvailable] = useState(true);
+
+    const styles = {
+        bounce: {
+            animation: 'x 1s',
+            animationName: Radium.keyframes(fadeInRight , 'bounce')
+        }
+    }
+    const styles1 = {
+        bounce: {
+            animation: 'x 1.5s',
+            animationName: Radium.keyframes(fadeInRight , 'bounce')
+        }
+    }
+    const styles2 = {
+        bounce: {
+            animation: 'x 2.0s',
+            animationName: Radium.keyframes(fadeInRight , 'bounce')
+        }
+    }
+    const styles3 = {
+        bounce: {
+            animation: 'x 2.5s',
+            animationName: Radium.keyframes(fadeInRight , 'bounce')
+        }
+    }
 
      useEffect(() => {
         const values = queryString.parse(window.location.search);
@@ -260,17 +293,17 @@ function ViewItem({getItemDetails,userId,item,history,updateCart,updateCartCount
         });
         return (
 
-            <div  >
+            <div className=" viewItemTable" >
             <div className="row">
             <div className="col">
-                <table className="mt-5" align="center">
+                <table className="" >
                     <tr>
-                        <td align="center">
+                        <td>
                             <div className="viewItemCarousel">
                                 <ImageGallery items={images}/>
                             </div>
                         </td>
-                        <td>
+                        <td style={{width:"20%"}} >
                             <div className="card viewItemCard" style={{width: "auto"}}>
                                 <div className="card-body">
                                     <h5 className="card-title">{item.name}</h5>
@@ -338,11 +371,89 @@ function ViewItem({getItemDetails,userId,item,history,updateCart,updateCartCount
                                 </div>
                             </div>
                         </td>
-                        <td>
 
+                        <td className="viewItemHot" >
+
+                            <section className="feature_add_area ml-5">
+
+                                <StyleRoot>
+                                <div className="container ml-5" style={styles.bounce} >
+                                    <div className  ="row feature_inner">
+                                        <div className="col-lg-6">
+                                            <div className="f_add_item">
+                                                <div className="f_add_img"><img className="img-fluid"
+                                                                                src={fadd}
+                                                                                alt=""/></div>
+                                                <div className="f_add_hover">
+                                                    <h4>Best Summer <br/>Collection</h4>
+                                                    <a className="add_btn" href="#">Shop Now
+                                                        <i className="arrow_right"></i></a>
+                                                </div>
+                                                <div className="sale">Sale</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </StyleRoot>
+                                <StyleRoot>
+                                <div className="container mt-2 ml-5" style={styles1.bounce}>
+                                    <div className="row feature_inner">
+                                        <div className="col-lg-6">
+                                            <div className="f_add_item">
+                                                <div className="f_add_img"><img className="img-fluid"
+                                                                                src={fadd2}
+                                                                                alt=""/></div>
+                                                <div className="f_add_hover">
+                                                    <h4>Best Summer <br/>Collection</h4>
+                                                    <a className="add_btn" href="#">Shop Now
+                                                        <i className="arrow_right"></i></a>
+                                                </div>
+                                                <div className="sale">Sale</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </StyleRoot>
+                                <StyleRoot>
+                                <div className="container mt-2 ml-5" style={styles2.bounce}>
+                                    <div className="row feature_inner">
+                                        <div className="col-lg-6">
+                                            <div className="f_add_item">
+                                                <div className="f_add_img"><img className="img-fluid"
+                                                                                src={fadd3}
+                                                                                alt=""/></div>
+                                                <div className="f_add_hover">
+                                                    <h4>Best Summer <br/>Collection</h4>
+                                                    <a className="add_btn" href="#">Shop Now
+                                                        <i className="arrow_right"></i></a>
+                                                </div>
+                                                <div className="sale">Sale</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </StyleRoot>
+                                <StyleRoot>
+                                <div className="container mt-2 ml-5" style={styles3.bounce}>
+                                    <div className="row feature_inner">
+                                        <div className="col-lg-6">
+                                            <div className="f_add_item">
+                                                <div className="f_add_img"><img className="img-fluid"
+                                                                                src={fadd2}
+                                                                                alt=""/></div>
+                                                <div className="f_add_hover">
+                                                    <h4>Best Summer <br/>Collection</h4>
+                                                    <a className="add_btn" href="#">Shop Now
+                                                        <i className="arrow_right"></i></a>
+                                                </div>
+                                                <div className="sale">Sale</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </StyleRoot>
+                            </section>
                         </td>
-                    </tr>
-                    <tr>
                     </tr>
                 </table>
                 <div className="col">

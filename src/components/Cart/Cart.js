@@ -22,7 +22,7 @@ function Cart(props) {
     }, []);
     const styles = {
         bounce: {
-            animation: 'x 2s',
+            animation: 'x 1.4s',
             animationName: Radium.keyframes(bounceInDown, 'bounce')
         }
     }

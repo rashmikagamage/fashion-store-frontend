@@ -23,8 +23,8 @@ function SmallCategories() {
 
                     <div className="related-content">
                         <div className="title text-center">
-                            <h1 className="mb-10">Related Searched Products</h1>
-                            <p className="mt-2">Who are in extremely love to give you best of best products</p>
+                            <h1 className="mb-10" style={{color: "red"}}>Hot Deals ! Hurry Up</h1>
+                            <p className="mt-2 "    style={{color: "green"}}>Who are in extremely love to give you best of best products</p>
                         </div>
                     </div>
 

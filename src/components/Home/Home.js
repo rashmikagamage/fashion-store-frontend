@@ -14,9 +14,10 @@ import insta6 from './icon/insta-6.jpg'
 import latest1 from './icon/latest-1.jpg'
 import latest2 from './icon/latest-2.jpg'
 import latest3 from './icon/latest-3.jpg'
-import {slideInRight,fadeIn} from 'react-animations'
+import ScrollAnimation from 'react-animate-on-scroll';
+import {fadeInRightBig,fadeIn} from 'react-animations'
 import Radium, {StyleRoot} from 'radium';
-
+import "animate.css/animate.min.css";
 
 import './style.css'
 import image1 from "../../images/ImageSlider/imageSlider1.jpg";
@@ -27,14 +28,14 @@ function Home() {
     const styles = {
         bounce: {
             animation: 'x 4s',
-            animationName: Radium.keyframes(fadeIn, 'bounce')
+            animationName: Radium.keyframes(fadeIn , 'bounce')
         }
     }
 
     const style2 = {
         bounce: {
-            animation: 'x 4s',
-            animationName: Radium.keyframes(slideInRight, 'bounce')
+            animation: 'x 2s',
+            animationName: Radium.keyframes(fadeInRightBig, 'bounce')
         }
     }
     return (
@@ -113,7 +114,9 @@ function Home() {
                 </div>
             </div>
             </StyleRoot>
+            <ScrollAnimation animateIn="fadeIn"animateOut='fadeOut'>
             <SmallCategories/>
+            </ScrollAnimation>
           {/*  <center>
                 <div>
                     <div className="imageSlider">
@@ -148,7 +151,7 @@ function Home() {
                     </div>
                 </div>
             </center>*/}
-
+            <ScrollAnimation animateIn="fadeIn"animateOut='fadeIn'>
             <div className="instagram-photo mt-5">
                 <div className="insta-item set-bg">
                     <img src={insta1} alt=""/>
@@ -191,8 +194,8 @@ function Home() {
                 </div>
 
             </div>
-
-
+            </ScrollAnimation>
+            <ScrollAnimation animateIn="bounceInRight"animateOut='bounceOutLeft'>
             <section className="latest-blog spad">
                 <div className="container">
                     <div className="row">
@@ -260,7 +263,7 @@ function Home() {
                     </div>
                 </div>
             </section>
-
+            </ScrollAnimation>
         </div>
     )
 
