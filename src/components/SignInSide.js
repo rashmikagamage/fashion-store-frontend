@@ -19,7 +19,7 @@ import {connect} from 'react-redux';
 
 import * as reduxActions from '../common/actions';
 
-import {fetchLogin} from '../common/apiRoutes';
+import {fetchLogin,getTest} from '../common/apiRoutes';
 
 import jwt_decode from 'jwt-decode';
 
@@ -82,6 +82,8 @@ function SignInSide({loginUser,loginSuccess}) {
 
   useEffect(() => {
   
+    const res = getTest();
+    
    
   }, []);
 

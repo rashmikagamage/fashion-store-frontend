@@ -403,7 +403,7 @@ export const getCart = async (id)=>{
 	const response = await axios.get('http://localhost:4000/api/getCart/'+id.payload);
 	return response;
 }
-
+// https://sensorapp-test.herokuapp.com/getAllSensors
 export const updateCartDb = async(data)=>{
 	const response = await axios.post('http://localhost:4000/api/addItemToCart/'+data[0].userId,{data:data[0].payload})
 }
@@ -462,4 +462,10 @@ export const LoginAsAdmin = async (user) => {
 	} catch (e) {
         console.log(e);
     }
+}
+
+export const getTest = async ()=>{
+	const response = await axios.get('https://sensorapp-test.herokuapp.com/getAllSensors');
+	console.log('res',response);
+	return response;
 }
