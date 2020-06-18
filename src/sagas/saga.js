@@ -24,7 +24,7 @@ import {
 	updateRating,
 	deleteRating,
 	getAllCategories,
-	getSearchProduct, updateDiscount, deductQuantity, getCart, updateCartDb, removeCartDb
+	getSearchProduct, updateDiscount, deductQuantity, getCart, updateCartDb, removeCartDb, removeCartCompletely
 } from "../common/apiRoutes";
 import * as globalActions from "../common/actions";
 
@@ -388,6 +388,14 @@ function *remove_cart_db_worker({payload:item,userId}) {
 		console.log(e)
 	}
 }
+function *remove_cart_completely_db_worker({payload:userId}) {
+	try {
+		yield call(removeCartCompletely,{payload:userId})
+	}catch (e) {
+		console.log(e)
+	}
+}
+
 export function* rootWatcher() {
 	yield all([
 		takeLatest(CONSTANTS.ADD_TO_WISHLIST, addToWishListWorker),
@@ -415,6 +423,7 @@ export function* rootWatcher() {
 		takeLatest('DEDUCT_QUANTITY',deductQuantityWorker),
 		takeLatest('GET_CART',getCartWorker),
 		takeLatest('UPDATE_CART_DB',updateCartDbWorker),
-		takeLatest('REMOVE_CART_DB',remove_cart_db_worker)
+		takeLatest('REMOVE_CART_DB',remove_cart_db_worker),
+		takeLatest('REMOVE_CART_COMPLETELY_DB',remove_cart_completely_db_worker)
 	]);
 }

@@ -177,9 +177,11 @@ const reducer = (state = initialState, {type, payload}) => {
 
         let arr = newState.cart;
         newState.cart = [];
+        newState.user.cart=[];
         arr.map(item=>{
-            if(item.uuid != payload.uuid){
-                newState.cart.push(item)
+            if(item.uuid !== payload.uuid){
+                newState.cart.push(item);
+                newState.user.cart.push(item)
             }
         })
         newState.cartTotal=0;
@@ -222,7 +224,6 @@ const reducer = (state = initialState, {type, payload}) => {
        
             
         localStorage.removeItem("jwtToken");
-    
         newState.auth.userId = '';
         newState.auth.email = '';
         newState.auth.role = "guest";
@@ -237,6 +238,7 @@ const reducer = (state = initialState, {type, payload}) => {
        
         newState.auth.isTokenChecked = true;
     }if(type=="GET_CART_SUCCESS"){
+
        newState.user.cart = payload[0].cart;
        newState.cart = payload[0].cart;
        newState.itemInCartCount = payload[0].cart.length;
@@ -246,7 +248,9 @@ const reducer = (state = initialState, {type, payload}) => {
        })
        newState.cartTotal = total;
 
-
+    }if(type === "REMOVE_CART_COMPLETELY"){
+        newState.cart=[];
+        newState.user.cart =[];
     }
     
 

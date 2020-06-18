@@ -174,3 +174,16 @@ export function remove_item_DB(item,userId) {
         payload : item,userId
     }
 }
+
+export  function removeCartCompletely() {
+    return{
+        type:'REMOVE_CART_COMPLETELY',
+
+    }
+}
+export  function removeCartCompletelyDb(userId) {
+    return{
+        type:'REMOVE_CART_COMPLETELY_DB',
+        payload : userId
+    }
+}

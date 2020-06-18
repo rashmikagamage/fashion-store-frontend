@@ -469,3 +469,11 @@ export const getTest = async ()=>{
 	console.log('res',response);
 	return response;
 }
+export  const removeCartCompletely= async (data) =>{
+	try{
+
+		const  response = await  axios.delete('http://localhost:4000/api/deletecartcompletely/'+data.payload)
+	}catch (e) {
+		console.log(e)
+	}
+}

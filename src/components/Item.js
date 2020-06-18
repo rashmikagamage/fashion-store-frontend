@@ -9,6 +9,7 @@ import {add_to_total, cart_check_true, check_cart, update_cart, update_cart_coun
 import  * as ACTIONS from "../common/actions";
 import { useHistory } from 'react-router-dom'
 import WishListModal from '../components/WishList/WishListModal';
+import AddToWishListModal from '../components/WishList/AddWishListModal';
 
 
 function Item(props) {
@@ -20,6 +21,7 @@ function Item(props) {
         history.push("/wishlist");
     }
     const [modalShow, setModalShow] = useState(false);
+    const [addToWishModal, setAddToWishModal] = useState(false);
    /* const {id,images,description,price,name,selectedcategory,selectedSubCategory} = props;*/
     const{item,userId} = props;
     const [inCart , setIncart] = useState(false);
@@ -51,6 +53,7 @@ function Item(props) {
         if(props.isAuthenticated && props.role === "user")
         {
             props.addToWishList({userId,item});
+            setAddToWishModal(true);
 
         }
         else{
@@ -83,6 +86,10 @@ function Item(props) {
         show={modalShow}
         onHide={() => setModalShow(false)}
     />
+    <AddToWishListModal
+    show={addToWishModal}
+    onHide={() => setAddToWishModal(false)}
+/>
          <div onClick={()=> checkUser()} >
         <MDBView hover className="rounded z-depth-4 mb-3 item" waves>
 

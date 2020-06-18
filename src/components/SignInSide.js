@@ -100,14 +100,12 @@ const login = async(email,password) => {
   
  
  const res = await fetchLogin({email,password});
- console.log('res in login',res);
 
  if (res.isValidLogin) { 
 
         localStorage.setItem('jwtToken',res.token);
   
         const decodedUser = jwt_decode(res.token);
-console.log('decodeUser login',decodedUser);
 
         setMessage(res.message);
         setIsLog(true);
@@ -126,8 +124,6 @@ console.log('decodeUser login',decodedUser);
       setIsLog(false);
       setEmail('');
       setPassword('');
-      console.log('invalid user');
-
         
       }
 }
@@ -261,7 +257,6 @@ SignInSide.propTypes = {
 
 const mapStateToProps = (state)=> {
 
-  console.log('state',state);
   return{
     state : state
   }
