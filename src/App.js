@@ -50,7 +50,7 @@ function App (props) {
 
         }
 
-    },);
+    },[props.auth,props.cart]);
 
     if (props.loggedIn) {
 
@@ -124,7 +124,8 @@ function App (props) {
 const mapStateToProps = state => {
     return {
        auth : state.auth,
-        loggedIn  :state.loggedIn
+        loggedIn  :state.loggedIn,
+        cart : state.cart
     }
   }
   

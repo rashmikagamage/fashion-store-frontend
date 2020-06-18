@@ -23,7 +23,8 @@ function HomePage(props) {
 
 const mapStateToProps = state => {
     return {
-        state : state
+        state : state,
+
     }
 }
 
