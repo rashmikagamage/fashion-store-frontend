@@ -26,6 +26,11 @@ function Cart(props) {
             animationName: Radium.keyframes(bounceInDown, 'bounce')
         }
     }
+    let paymentElig = false;
+    if(props.cartTotal>0){
+        paymentElig = true;
+    }
+
     return (
         <div>
             <StyleRoot>
@@ -50,10 +55,13 @@ function Cart(props) {
                             <div className="card-body">
                                 <h5 className="card-title">Total : {props.cartTotal} LKR</h5>
                                 <p className="card-text">We make deliveries around Island.Please make sure you give right details to get a faster delivery  </p>
-                                <button className=" btn btn-sm btn-outline-pink " onClick={()=>{
-                                    props.deductQ(props.cart)
-                                    history.push("/Payment")
-                                }}>Proceed to Payment</button>
+                                {paymentElig?
+                                    <button className=" btn btn-sm btn-outline-pink " onClick={()=>{
+                                        props.deductQ(props.cart)
+                                        history.push("/Payment")
+                                    }}>Proceed to Payment</button> : <div style={{color: "red"}}> No Item in the Cart</div>
+                                }
+
                             </div>
                         </div>
                     </td>

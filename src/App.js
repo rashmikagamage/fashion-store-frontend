@@ -50,7 +50,7 @@ function App (props) {
 
         }
 
-    },[props.auth,props.cart]);
+    },[]);
 
     if (props.loggedIn) {
 

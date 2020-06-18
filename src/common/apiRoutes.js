@@ -463,3 +463,12 @@ export const LoginAsAdmin = async (user) => {
         console.log(e);
     }
 }
+
+export  const removeCartCompletely= async (data) =>{
+	try{
+
+		const  response = await  axios.delete('http://localhost:4000/api/deletecartcompletely/'+data.payload)
+	}catch (e) {
+		console.log(e)
+	}
+}

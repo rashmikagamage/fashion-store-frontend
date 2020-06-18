@@ -3,6 +3,8 @@ import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/Button';
 import {MDBBtn} from "mdbreact";
 import {Link} from "react-router-dom";
+import {deductQuantity, updateTotal, zeroTotal} from "../../store/actions";
+import {connect} from "react-redux";
 
 
 function CartModal(props) {
@@ -31,5 +33,22 @@ function CartModal(props) {
         </Modal>
     );
 }
+const mapStateToProps = state => {
 
-export default (CartModal);
+    return {
+        cart: state.cart,
+        selectedItemsArray: state.selectedItemsArray,
+        cartTotal: state.cartTotal
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        changeTotal : (price) => dispatch(updateTotal(price)),
+        resetTotal : (price) => dispatch(zeroTotal(price)),
+        deductQ : (cart) => dispatch(deductQuantity(cart))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CartModal)
+
