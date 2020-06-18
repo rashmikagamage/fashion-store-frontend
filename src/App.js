@@ -13,6 +13,7 @@ import login from "./components/SignInSide";
 import signup from "./components/SignUp";
 import AddItem from "./components/AddItem";
 import ManagerDash from "./components/ManagerDash";
+import { Redirect } from 'react-router-dom';
 // import NotFound from './components/NotFound/PageNotFound';
 import PrivateRoute from './PrivateRoutes/PrivateRouter';
 import PrivateStoreManagerRoute from "./PrivateRoutes/PrivateRouerForStoreManager";
@@ -29,13 +30,16 @@ import Home from "./components/Home/Home";
 import StoreManagerLogin from "./components/Login/StoreManagerLogin";
 
 import AdminLogin from "./components/Login/AdminLogin";
+import addCatergory from "./components/addCategory";
+import Header from "./components/Header";
 
 
 
 function App (props) {
 
-
+    const[User,setUser] = useState(false);
     const[a,seta] = useState(1);
+    let decodedUser;
     useEffect(() => {
 
         props.getAllProducts();
@@ -45,59 +49,91 @@ function App (props) {
             console.log('guest user');
         }
         else{
-            const decodedUser = jwt_decode(token);
+             decodedUser = jwt_decode(token);
             //console.log(decodedUser);
             props.setUserDetails(decodedUser); // set user using localstorage
             props.getWishList(decodedUser.id); // set userWishList using localstorage
             props.getCart(decodedUser.id)
+
         }
         
-        },[])
+        },);
 
+    if(props.loggedIn){
 
-    return (
+        return (
+            <Router>
+                {
+                    <div>
+                        <switch>
+                            <Route path="/" exact component={HomePage}/>
+                            <Route path="/viewItem" exact component={HomePage}/>
+                            <Route path="/products" exact component={HomePage}/>
+                            <Route path="/wishlist" exact component={HomePage}/>
+                            <Route path="/cart" exact component={HomePage}/>
+                            <Route path="/payment" exact component={HomePage}/>
+                            <Route path = "/" exact component ={Home}/>
+                            <Route path = "/" exact component ={ImageSlider}/>
+                            <Route path="/s" exact component={SelectedProducts}/>
+                            <Route path = "/products" exact component ={ItemContainer}/>
+                            <Route path ="/viewItem" exact component={viewItem}/>
+                            <PrivateRoute exact path="/cart"  component={Cart}></PrivateRoute>
+                            <PrivateRoute exact path="/wishlist" component={wishList}></PrivateRoute>
+                            <Route path ="/login" exact component={login}/>
+                            <Route path ="/signup" exact component={signup}/>
+                            <Route path ="/AddDiscount" exact component={Discount}/>
+                            <Route path ="/AddItem" exact component={AddItem}/>
+                            <Route path ="/ManagerDash" exact component={ManagerDash}/>
+                            <Route path ="/AddManager" exact component={AddManager}/>
+                            <Route path ="/adminDash" exact component={AdminDash}/>
+                            <Route path = '/payment' exact component={Payment}/>
+                            <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
+                            <Route path = '/adminLogin' exact component={AdminLogin}/>
+                            <Route path= '/addCategory' exact component={addCatergory}/>
+                        </switch>
+                        <Footer/>
+                    </div>
+                }
+            </Router>
+        );
+    }
+    else{
 
+        return (
+            <Router>
+                {
+                    <div>
+                        <switch>
+                            <Route path="/" exact component={HomePage}/>
+                            <Route path="/viewItem" exact component={HomePage}/>
+                            <Route path="/products" exact component={HomePage}/>
+                            <Route path = "/" exact component ={Home}/>
+                            <Route path="/s" exact component={SelectedProducts}/>
+                            <Route path = "/products" exact component ={ItemContainer}/>
+                            <Route path ="/wishlist" exact component={login}/>
+                            <Route path ="/login" exact component={login}/>
+                            <Route path ="/signup" exact component={signup}/>
+                            <Route path="/" exact component={Footer}/>
+                            <Route path="/cart" exact component={login}/>
+                            <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
+                            <Route path = '/adminLogin' exact component={AdminLogin}/>
+                            <Route path="/products" exact component={Footer}/>
+                        </switch>
 
-        <Router>
-            <div>
+                    </div>
+                }
+            </Router>
+        );
 
-                    <switch>
-                        <Route path="/" exact component={HomePage}/>
-                        <Route path="/viewItem" exact component={HomePage}/>
-                        <Route path="/products" exact component={HomePage}/>
-                        <Route path="/wislist" exact component={HomePage}/>
-                        <Route path="/cart" exact component={HomePage}/>
-                        <Route path="/payment" exact component={HomePage}/>
-                        <Route path = "/" exact component ={Home}/>
-                        <Route path = "/" exact component ={ImageSlider}/>
-                        <Route path="/s" exact component={SelectedProducts}/>
-                        <Route path = "/products" exact component ={ItemContainer}/>
-                        <Route path ="/viewItem" exact component={viewItem}/>
-                        <PrivateRoute exact path="/cart"  component={Cart}></PrivateRoute>
-                        <PrivateRoute exact path="/wishlist" component={wishList}></PrivateRoute>
-                        <Route path ="/login" exact component={login}/>
-                        <Route path ="/signup" exact component={signup}/>
-                        <Route path ="/AddDiscount" exact component={Discount}/>
-                        <Route path ="/AddItem" exact component={AddItem}/>
-                        <Route path ="/ManagerDash" exact component={ManagerDash}/>
-                        <Route path ="/AddManager" exact component={AddManager}/>
-                        <Route path ="/adminDash" exact component={AdminDash}/>
-                        <Route path = '/payment' exact component={Payment}/>
-                        <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
-                        <Route path = '/adminLogin' exact component={AdminLogin}/>
+    }
 
-                    </switch>
-                <Footer/>
-            </div>
-        </Router>
-
-    );
 }
 
 
 const mapStateToProps = state => {
     return {
-       
+       auth : state.auth,
+        loggedIn  :state.loggedIn
     }
   }
   
@@ -106,8 +142,7 @@ const mapStateToProps = state => {
        
       getAllProducts : () => dispatch(reduxActions.GetAllProducts()),
       getWishList : (userId) => dispatch(reduxActions.GetUserWishListAction(userId)),
-      setUserDetails : (user) => dispatch(reduxActions.loginSuccessAction(user)),
-        getCart : (userId) => dispatch(getCart(userId))
+      setUserDetails : (user) => dispatch(reduxActions.loginSuccessAction(user)), getCart : (userId) => dispatch(getCart(userId))
     }
   }
   

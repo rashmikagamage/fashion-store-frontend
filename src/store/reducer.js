@@ -22,17 +22,7 @@ export const initialState = {
         }
 
     },
-    // auth: {
-    //     currentUser: {
 
-    //         role: 'guest'
-    //     },
-    //     isAuthenticated: false,
-    //     isTokenChecked: false,
-    //     isRegistered: false,
-    //     wishList: {},
-    //     wishListCount: 0
-    // },
     auth: {
         isAuthenticated: false,
         isTokenChecked: false,
@@ -60,7 +50,8 @@ export const initialState = {
     discountStatus : 0,
     cartCheck: false,
     cart: [],
-    cartCount : 0
+    cartCount : 0,
+    loggedIn : false
 
 };
 
@@ -217,6 +208,7 @@ const reducer = (state = initialState, {type, payload}) => {
         newState.auth.email = payload.name;
         newState.auth.role = payload.role;
         newState.auth.isAuthenticated = true;
+        newState.loggedIn = true;
     }
     if(type === ACTIONS.USER_LOGIN_FAILED){
        
@@ -224,6 +216,7 @@ const reducer = (state = initialState, {type, payload}) => {
         newState.auth.userId = '';
         newState.auth.email = '';
         newState.auth.isAuthenticated = false;
+        newState.loggedIn = false;
     }
     if(type === "LOG_OUT"){
        
@@ -235,6 +228,10 @@ const reducer = (state = initialState, {type, payload}) => {
         newState.auth.role = "guest";
         newState.auth.isAuthenticated = false;
         newState.auth.wishListCount = 0;
+        newState.cartCount = 0;
+        newState.cart=[];
+        newState.user.cart =[];
+        newState.loggedIn=false;
     }
     if(type === "IS_TOKEN_CHECKED"){
        

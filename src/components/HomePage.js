@@ -15,8 +15,6 @@ function HomePage(props) {
         <div>
             <Header/>
         <NavigationBar> </NavigationBar>
-
-
         </div>
 
     )

@@ -96,18 +96,20 @@ function Item(props) {
           <MDBMask overlay="white-slight" />
         </MDBView>
          </div>
-          <h6 className=" mb-3 itemIcons" >
+          <h6 className=" mb-2 itemIcons" >
               {item.name}
           </h6>
-            {discountAvailable ? <h6 className=" mb-3 itemIcons" >
+            {discountAvailable ? <h6 className=" mb-2 itemIcons" >
                 Price :   LKR {item.price}.00
                 <br/>
                     <span style={{color:"red"}}> {item.discount}% OFF</span>
 
             </h6> :
+                <div>
                <h6 className=" mb-3 itemIcons" >
                         Price :   LKR {item.price}.00
-                    </h6>
+               </h6>
+                </div>
             }
 
             <MDBBtn className="fas fa-heart fa-2x itemIcons mb-3"
