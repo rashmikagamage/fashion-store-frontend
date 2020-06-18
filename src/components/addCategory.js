@@ -1,108 +1,218 @@
-import React from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { useState } from 'react';
+import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import TextField from '@material-ui/core/TextField';
+import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import Typography from '@material-ui/core/Typography';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
+import { useHistory } from "react-router-dom";
+import axios from "axios";
+import Alert from '@material-ui/lab/Alert';
+import CloseIcon from '@material-ui/icons/Close';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
 
-const axios = require('axios').default;
 
-export default class addCatergory extends React.Component{
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: "mCatergory",
-            mCat: [
-                { id: "1", Catergory: "Male" },
-                { id: "2", Catergory: "Female" },
-                { id: "3", Catergory: "Kids" },
-                {id : "4", Catergory: "Sports"},
-                {id: "5", Catergory: "Special Discount"}
-            ]
-        };
 
-        this.handleSubmit = this.handleSubmit.bind(this);
+import { useFormik } from 'formik';
+import * as Yup from "yup";
+import { Collapse, IconButton } from '@material-ui/core';
+
+
+
+const useStyles = makeStyles((theme) => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main,
+  },
+  form: {
+    width: '100%', // Fix IE 11 issue.
+    marginTop: theme.spacing(3),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  }
+}));
+
+const validationSchema = Yup.object({
+  category: Yup.string().required("Please fill the field"),
+  subCategory: Yup.string().required("Please fill the field"),
+});
+
+
+
+function AddCategory() {
+
+  const[msg, setMsg] = useState();
+  const[show, setShow] = useState(false);
+  const[severity,setSeverity] = useState();
+  
+
+  let history = useHistory();
+
+  function redirect() { history.push("/login"); }
+
+  const fetchData = async (manager) =>{
+ 
+    try{
+    
+    const data = manager ;
+    
+       const correctData = manager["manager"];
+    
+    
+    const response = await axios.request({
+        method: 'POST',
+        url: "http://localhost:4000/api/addCategories",
+        headers: {
+          'Content-Type': 'application/json;charset=UTF-8',
+              "Access-Control-Allow-Origin": "*"
+        },
+        data: JSON.stringify(data),
+        
+        }).then((res) => {
+    
+        const result =  res.data;
+        console.log(result);
+
+       if (res.data.ok == 1){
+        setMsg("Category Added Successfully");
+        setShow(true);
+        setSeverity("success");
+      }
+        //return result;
+        });
+    
+      const resData = await response;
+       
+      console.log('responsee api',resData);
+       return resData;
+       
+    
+    
+    }
+    catch(e){
+      console.log(e);
+    }
+    
+    
     }
 
-    handleSubmit(event) {
-        this.addCat();
-        alert("ADDED SUCCESSFULLY: ");
-        event.preventDefault();
-    }
 
-    handleChange = event => {
-        this.setState({ value: event.target.value });
-    };
+  
 
-    addCat= async (user) =>{
+    const { handleSubmit, handleChange, values, errors } = useFormik({
+      initialValues: {
+        category: "",
+        subCategory: "",
+      },
+      validationSchema,
+      onSubmit(values) {
+          const catObject = {
+            "category": values.category,
+            "subCategory": values.subCategory,
+          }
+          fetchData(catObject);
+        
+      }
+    });
 
-        try{
-
-            const data = user ;
-            console.log('api data = ',data);
-            const response = await axios.request({
-                method: 'POST',
-                url: `http://localhost:4000/api/addCatergories`,
-                headers: {
-                    'Content-Type': 'application/json;charset=UTF-8',
-                    "Access-Control-Allow-Origin": "*"
-                },
-                data: JSON.stringify(data),
-
-            }).then((res) => {
-
-                console.log('output',res);
-
-                // console.log('out',res.data);
-
-                // const result =  res.data;
-
-                //return result;
-            });
-
-            // const resData = await response;
-
-            // console.log('responsee api',resData);
-
-            //return resData;
+    
+    
+    const isDisabled = Object.keys(errors).some(x => errors[x]);
 
 
+  const classes = useStyles();
 
-        }
-        catch(e){
-            console.log(e);
-        }
+  return (
+    <Container component="main" maxWidth="xs">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Typography component="h1" variant="h5">
+          Add Category
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+         
+         <Collapse in={show}>
+
+           <Alert severity={severity} variant="filled" action={
+             <IconButton 
+                aria-label="close"
+                color="inherit"
+                size="small"
+                onClick={() => {
+                  
+                  setShow(false);
+
+                }}><CloseIcon fontSize="inherit"/>
+                </IconButton>}>{msg}</Alert>
+           
 
 
-    }
+         </Collapse>
+          
+          
+          <br></br>
 
-    render() {
-        return (
-            <form onSubmit={this.addCat}>
-                <div className="form-group row">
-                    Select Main Catergory
-                    <br></br>
-                    <select className="form-control">
-                        {this.state.mCat.map(item => (
-                            <option key={item.id} value={item.Catergory}>
-                                {item.Catergory}
-                            </option>
-                        ))}
-                        {console.log(this.state.mCat)}
-                    </select>
-                </div>
+          <Grid className={ classes.section} item xs={12}>
+            <InputLabel id="category">Category of Item</InputLabel> 
+              <Select 
+                id="category"
+                labelId="category"
+                name="category"
+                fullWidth
+                autoFocus
+                variant="outlined"
+                onChange={handleChange}>            
+                  <MenuItem value="menCategories">Men</MenuItem>
+                  <MenuItem value="womenCategories">Women</MenuItem>
+                  <MenuItem value="kidsCategories">Kids</MenuItem>
+                  <MenuItem value="sportsCategories">Sports</MenuItem>
+                  <MenuItem value="discountCategories">Discount</MenuItem>
+              </Select>
+              {errors.category}
+            </Grid>
 
-                <br></br>
-                <div className="form-group">
-                    <label>Add Subcatergory   </label>
-                    <input
-                        name="subCat"
-                        className="form-control"
-                        placeholder="--"
-                        value = {this.state.subCat}
-                        onChange= {this.onChangesubcat}/>
-                </div>
+            <br/>
+            <Grid item xs={12} sm={6}>
+              <TextField
+                variant="outlined"
+                fullWidth
+                id="subCategory"
+                label="Sub Category"
+                name="subCategory"
+                onChange={handleChange}
+              />{errors.subCategory}
+            </Grid>
+            
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="primary"
+            className={classes.submit}
+            disabled={isDisabled}
+            onClick = {  handleSubmit  }>
+            Add Category
+          </Button>
+        </form>
+      </div>
 
-                <input className="btn btn-primary" type="submit" value="ADD" />
-
-            </form>
-
-        );
-    }
+      <Box mt={5}>
+      </Box>
+    </Container>
+  );
 }
+
+
+
+  export default  (AddCategory);

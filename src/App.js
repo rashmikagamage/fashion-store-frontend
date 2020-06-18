@@ -28,7 +28,7 @@ import Payment from "./components/Payment/Payment";
 import Home from "./components/Home/Home";
 
 import StoreManagerLogin from "./components/Login/StoreManagerLogin";
-
+import AddCategory from "./components/AddCategory";
 import AdminLogin from "./components/Login/AdminLogin";
 import addCatergory from "./components/addCategory";
 import Header from "./components/Header";
@@ -57,6 +57,7 @@ function App (props) {
 
         }
         
+<<<<<<< HEAD
         },);
 
     if(props.loggedIn){
@@ -127,6 +128,48 @@ function App (props) {
 
     }
 
+=======
+        },[])
+
+
+    return (
+
+
+        <Router>
+            <div>
+
+                    <switch>
+                        <Route path="/" exact component={HomePage}/>
+                        <Route path="/viewItem" exact component={HomePage}/>
+                        <Route path="/products" exact component={HomePage}/>
+                        <Route path="/wislist" exact component={HomePage}/>
+                        <Route path="/cart" exact component={HomePage}/>
+                        <Route path="/payment" exact component={HomePage}/>
+                        <Route path = "/" exact component ={Home}/>
+                        <Route path = "/" exact component ={ImageSlider}/>
+                        <Route path="/s" exact component={SelectedProducts}/>
+                        <Route path = "/products" exact component ={ItemContainer}/>
+                        <Route path ="/viewItem" exact component={viewItem}/>
+                        <PrivateRoute exact path="/cart"  component={Cart}></PrivateRoute>
+                        <PrivateRoute exact path="/wishlist" component={wishList}></PrivateRoute>
+                        <Route path ="/login" exact component={login}/>
+                        <Route path ="/signup" exact component={signup}/>
+                        <Route path ="/AddDiscount" exact component={Discount}/>
+                        <Route path ="/AddItem" exact component={AddItem}/>
+                        <Route path ="/ManagerDash" exact component={ManagerDash}/>
+                        <Route path ="/AddManager" exact component={AddManager}/>
+                        <Route path ="/adminDash" exact component={AdminDash}/>
+                        <Route path = '/payment' exact component={Payment}/>
+                        <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
+                        <Route path = '/adminLogin' exact component={AdminLogin}/>
+                        <Route path = '/addCategory' exact component={AddCategory}/>
+                    </switch>
+                <Footer/>
+            </div>
+        </Router>
+
+    );
+>>>>>>> cdd75724de77d08714c5f0e7f7f7317bba24402e
 }
 
 
