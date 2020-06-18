@@ -27,7 +27,7 @@ import Payment from "./components/Payment/Payment";
 import Home from "./components/Home/Home";
 
 import StoreManagerLogin from "./components/Login/StoreManagerLogin";
-
+import AddCategory from "./components/AddCategory";
 import AdminLogin from "./components/Login/AdminLogin";
 
 
@@ -85,7 +85,7 @@ function App (props) {
                         <Route path = '/payment' exact component={Payment}/>
                         <Route path = '/stManagerLogin' exact component={StoreManagerLogin}/>
                         <Route path = '/adminLogin' exact component={AdminLogin}/>
-
+                        <Route path = '/addCategory' exact component={AddCategory}/>
                     </switch>
                 <Footer/>
             </div>
