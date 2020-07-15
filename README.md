@@ -1,3 +1,9 @@
+## Link to the Hosted webiste 
+https://fashion-store-mighty-coders.herokuapp.com/
+
+## Backeend Rest Api
+https://github.com/rashmikagamage/fashion-store-backend
+
 # React Bootstrap with Material Design
 MDBootstrap for React
 
@@ -10,7 +16,6 @@ To test, contribute or just see what we did follow few easy steps:
 - to build project use `yarn run build` (od `npm run build`)
 - `yarn run remove-demo` (or `npm run remove-demo`) removes demo app pages
 - enjoy!
-
 ## Bugs
 If you want to report a bug or submit your idea feel fre to open an issue
 
